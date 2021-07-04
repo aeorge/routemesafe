@@ -6,11 +6,11 @@ import {
 } from '@react-navigation/stack'
 import { useAuth } from '../AuthProvider'
 import { SplashScreen } from '../screens/SplashScreen'
-import { SignInScreen } from '../screens/authentication/SignInScreen'
-import { SignUpScreen } from '../screens/authentication/SignUpScreen'
+import { SignInScreen } from '../screens/auth/SignInScreen'
+import { SignUpScreen } from '../screens/auth/SignUpScreen'
 import { HomeScreen } from '../screens/HomeScreen'
 
-export type AuthenticationStackParamList = {
+export type AuthStackParamList = {
   SignIn: undefined
   SignUp: undefined
 }
@@ -20,7 +20,7 @@ export type AppStackParamList = {
 }
 
 const RootStack = createStackNavigator()
-const AuthenticationStack = createStackNavigator<AuthenticationStackParamList>()
+const AuthStack = createStackNavigator<AuthStackParamList>()
 const AppStack = createStackNavigator<AppStackParamList>()
 
 const options: StackNavigationOptions = {
@@ -37,14 +37,8 @@ export const Container = (): JSX.Element => {
       <RootStack.Navigator screenOptions={options}>
         {user === null ? (
           <>
-            <AuthenticationStack.Screen
-              name='SignIn'
-              component={SignInScreen}
-            />
-            <AuthenticationStack.Screen
-              name='SignUp'
-              component={SignUpScreen}
-            />
+            <AuthStack.Screen name='SignIn' component={SignInScreen} />
+            <AuthStack.Screen name='SignUp' component={SignUpScreen} />
           </>
         ) : (
           <AppStack.Screen name='Home' component={HomeScreen} />

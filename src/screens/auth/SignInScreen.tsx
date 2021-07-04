@@ -9,34 +9,34 @@ import {
 } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import type { AuthenticationStackParamList } from '../../components/Container'
+import type { AuthStackParamList } from '../../components/Container'
 import { useAuth } from '../../AuthProvider'
 import { Divider } from '../../components/Divider'
 import { Spacer } from '../../components/Spacer'
 
-type SignUpScreenNavigationProp = StackNavigationProp<
-  AuthenticationStackParamList,
-  'SignUp'
+type SignInScreenNavigationProp = StackNavigationProp<
+  AuthStackParamList,
+  'SignIn'
 >
 
-type SignUpScreenProps = {
-  navigation: SignUpScreenNavigationProp
+type SignInScreenProps = {
+  navigation: SignInScreenNavigationProp
 }
 
-export const SignUpScreen = ({
+export const SignInScreen = ({
   navigation
-}: SignUpScreenProps): JSX.Element => {
+}: SignInScreenProps): JSX.Element => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const emailRef = useRef<TextInput | null>(null)
   const passwordRef = useRef<TextInput | null>(null)
 
-  const { signUp } = useAuth()
+  const { signIn } = useAuth()
 
-  const handleSignUp = () => signUp(email, password)
+  const handleSignIn = () => signIn(email, password)
 
-  const handleNavigate = () => navigation.navigate('SignIn')
+  const handleNavigate = () => navigation.navigate('SignUp')
 
   return (
     <SafeAreaView style={styles.container}>
@@ -80,12 +80,12 @@ export const SignUpScreen = ({
         value={password}
       />
       <Spacer height={32} />
-      <Pressable onPress={handleSignUp} style={styles.signUpButton}>
-        <Text style={styles.signUpButtonText}>Sign Up</Text>
+      <Pressable onPress={handleSignIn} style={styles.signInButton}>
+        <Text style={styles.signInButtonText}>Sign In</Text>
       </Pressable>
       <Spacer height={16} />
-      <Pressable onPress={handleNavigate} style={styles.signInButton}>
-        <Text style={styles.signInButtonText}>Sign In</Text>
+      <Pressable onPress={handleNavigate} style={styles.signUpButton}>
+        <Text style={styles.signUpButtonText}>Sign Up</Text>
       </Pressable>
     </SafeAreaView>
   )
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#0F172A'
   },
-  signUpButton: {
+  signInButton: {
     alignItems: 'center',
     width: '100%',
     height: 48,
@@ -127,12 +127,12 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     backgroundColor: '#DB2777'
   },
-  signUpButtonText: {
+  signInButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#FFFFFF'
   },
-  signInButton: {
+  signUpButton: {
     alignItems: 'center',
     width: '100%',
     height: 48,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
     backgroundColor: 'transparent'
   },
-  signInButtonText: {
+  signUpButtonText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#DB2777'
