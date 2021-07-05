@@ -8,20 +8,20 @@ import { useAuth } from '../AuthProvider'
 import { SplashScreen } from '../screens/SplashScreen'
 import { SignInScreen } from '../screens/auth/SignInScreen'
 import { SignUpScreen } from '../screens/auth/SignUpScreen'
-import { HomeScreen } from '../screens/HomeScreen'
+import { MainScreen } from '../screens/main/MainScreen'
 
 export type AuthStackParamList = {
   SignIn: undefined
   SignUp: undefined
 }
 
-export type AppStackParamList = {
-  Home: undefined
+export type MainStackParamList = {
+  Main: undefined
 }
 
 const RootStack = createStackNavigator()
 const AuthStack = createStackNavigator<AuthStackParamList>()
-const AppStack = createStackNavigator<AppStackParamList>()
+const MainStack = createStackNavigator<MainStackParamList>()
 
 const options: StackNavigationOptions = {
   headerShown: false
@@ -41,7 +41,7 @@ export const Container = (): JSX.Element => {
             <AuthStack.Screen name='SignUp' component={SignUpScreen} />
           </>
         ) : (
-          <AppStack.Screen name='Home' component={HomeScreen} />
+          <MainStack.Screen name='Main' component={MainScreen} />
         )}
       </RootStack.Navigator>
     </NavigationContainer>
