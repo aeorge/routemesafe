@@ -1,11 +1,15 @@
 import React, { useRef, useState } from 'react'
 import {
   Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
   StatusBar,
   StyleSheet,
   Text,
-  TextInput
+  TextInput,
+  View
 } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -38,61 +42,77 @@ export const SignUpScreen = ({
 
   const handleNavigate = () => navigation.navigate('SignIn')
 
+  const handleKeyboardDismiss = () => Keyboard.dismiss()
+
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle='dark-content' />
-      <Image
-        source={require('../../assets/images/logo.png')}
-        style={styles.image}
-      />
-      <Spacer height={48} />
-      <Text style={styles.text}>RouteMeSafe</Text>
-      <Spacer height={32} />
-      <Divider />
-      <Spacer height={32} />
-      <TextInput
-        ref={emailRef}
-        autoCapitalize='none'
-        autoCorrect={false}
-        blurOnSubmit={false}
-        keyboardType='email-address'
-        onChangeText={setEmail}
-        onSubmitEditing={() => passwordRef.current?.focus()}
-        placeholder='Email'
-        placeholderTextColor='#94A3B8'
-        returnKeyType='next'
-        textContentType='emailAddress'
-        style={styles.input}
-        value={email}
-      />
-      <Spacer height={16} />
-      <TextInput
-        ref={passwordRef}
-        autoCapitalize='none'
-        autoCorrect={false}
-        onChangeText={setPassword}
-        placeholder='Password'
-        placeholderTextColor='#94A3B8'
-        returnKeyType='done'
-        textContentType='password'
-        secureTextEntry
-        style={styles.input}
-        value={password}
-      />
-      <Spacer height={32} />
-      <Pressable onPress={handleSignUp} style={styles.signUpButton}>
-        <Text style={styles.signUpButtonText}>Sign Up</Text>
-      </Pressable>
-      <Spacer height={16} />
-      <Pressable onPress={handleNavigate} style={styles.signInButton}>
-        <Text style={styles.signInButtonText}>Sign In</Text>
-      </Pressable>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.container}
+      >
+        <Pressable onPress={handleKeyboardDismiss} style={styles.container}>
+          <View style={styles.inner}>
+            <StatusBar barStyle='dark-content' />
+            <Image
+              source={require('../../assets/images/logo.png')}
+              style={styles.image}
+            />
+            <Spacer height={48} />
+            <View>
+              <Text style={styles.text}>RouteMeSafe</Text>
+            </View>
+            <Spacer height={32} />
+            <Divider />
+            <Spacer height={32} />
+            <TextInput
+              ref={emailRef}
+              autoCapitalize='none'
+              autoCorrect={false}
+              blurOnSubmit={false}
+              keyboardType='email-address'
+              onChangeText={setEmail}
+              onSubmitEditing={() => passwordRef.current?.focus()}
+              placeholder='Email'
+              placeholderTextColor='#94A3B8'
+              returnKeyType='next'
+              textContentType='emailAddress'
+              style={styles.input}
+              value={email}
+            />
+            <Spacer height={16} />
+            <TextInput
+              ref={passwordRef}
+              autoCapitalize='none'
+              autoCorrect={false}
+              onChangeText={setPassword}
+              placeholder='Password'
+              placeholderTextColor='#94A3B8'
+              returnKeyType='done'
+              textContentType='password'
+              secureTextEntry
+              style={styles.input}
+              value={password}
+            />
+            <Spacer height={32} />
+            <Pressable onPress={handleSignUp} style={styles.signUpButton}>
+              <Text style={styles.signUpButtonText}>Sign Up</Text>
+            </Pressable>
+            <Spacer height={16} />
+            <Pressable onPress={handleNavigate} style={styles.signInButton}>
+              <Text style={styles.signInButtonText}>Sign In</Text>
+            </Pressable>
+          </View>
+        </Pressable>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1
+  },
+  inner: {
     flex: 1,
     justifyContent: 'center',
     alignSelf: 'center',
