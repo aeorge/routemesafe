@@ -75,7 +75,7 @@ export const SignInScreen = ({
               placeholder='Email'
               placeholderTextColor='#94A3B8'
               returnKeyType='next'
-              textContentType='emailAddress'
+              textContentType='username'
               style={styles.input}
               value={email}
             />
