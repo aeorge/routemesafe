@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1CB6430826D7BB7F0038523E /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CB6430626D7BB7F0038523E /* Feather.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		864D8B5C18533B9661441D3A /* libPods-routemesafe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA10450CC884F06DA82E06E /* libPods-routemesafe.a */; };
 		B0A0E9FF86AFC91D1153A531 /* libPods-routemesafe-routemesafeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95474DA3E546609BE249E821 /* libPods-routemesafe-routemesafeTests.a */; };
@@ -36,6 +37,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = routemesafe/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = routemesafe/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = routemesafe/main.m; sourceTree = "<group>"; };
+		1CB6430626D7BB7F0038523E /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		49D1DAF0CC7F7E5E21D4559D /* Pods-routemesafe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe.release.xcconfig"; path = "Target Support Files/Pods-routemesafe/Pods-routemesafe.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = routemesafe/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95474DA3E546609BE249E821 /* libPods-routemesafe-routemesafeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-routemesafe-routemesafeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,6 +99,7 @@
 		13B07FAE1A68108700A75B9A /* routemesafe */ = {
 			isa = PBXGroup;
 			children = (
+				1CB6430526D7BB270038523E /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -105,6 +108,14 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
 			name = routemesafe;
+			sourceTree = "<group>";
+		};
+		1CB6430526D7BB270038523E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				1CB6430626D7BB7F0038523E /* Feather.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -235,6 +246,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1CB6430826D7BB7F0038523E /* Feather.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,7 +274,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nexport NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "set -e\n\nexport NODE_BINARY=/Users/georgios.kotziabassis/.nvm/versions/node/v16.0.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		0ED8495EBC759F515B16980E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
