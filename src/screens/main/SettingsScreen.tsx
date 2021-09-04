@@ -2,6 +2,7 @@ import React from 'react'
 import { Pressable, StatusBar, StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useAuth } from '../../AuthProvider'
+import { Spacer } from '../../components/Spacer'
 
 export const SettingsScreen = (): JSX.Element => {
   const { signOut } = useAuth()
@@ -12,9 +13,14 @@ export const SettingsScreen = (): JSX.Element => {
     <SafeAreaView style={styles.container}>
       <View style={styles.inner}>
         <StatusBar barStyle='dark-content' />
-        <Pressable onPress={handleSignOut} style={styles.signOutButton}>
-          <Text style={styles.signOutButtonText}>Sign Out</Text>
-        </Pressable>
+        <Spacer height={16} />
+        <Text style={styles.heading}>Settings</Text>
+        <Spacer height={16} />
+        <View style={styles.signOutButtonContainer}>
+          <Pressable onPress={handleSignOut} style={styles.signOutButton}>
+            <Text style={styles.signOutButtonText}>Sign Out</Text>
+          </Pressable>
+        </View>
       </View>
     </SafeAreaView>
   )
@@ -26,10 +32,19 @@ const styles = StyleSheet.create({
   },
   inner: {
     flex: 1,
+    alignSelf: 'center',
+    width: '90%'
+  },
+  heading: {
+    fontSize: 28,
+    fontWeight: 'bold'
+  },
+  signOutButtonContainer: {
+    flex: 1,
     justifyContent: 'flex-end',
     alignSelf: 'center',
     alignItems: 'center',
-    width: '90%'
+    width: '100%'
   },
   signOutButton: {
     alignItems: 'center',
