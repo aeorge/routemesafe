@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Feather'
 import { MapScreen } from './MapScreen'
-import { SpotsScreen } from './SpotsScreen'
+import { SpotsScreen } from './SpotsScreen/SpotsScreen'
 import { SettingsScreen } from './SettingsScreen'
 
 export type BottomTabParamList = {
