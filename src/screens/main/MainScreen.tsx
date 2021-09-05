@@ -1,5 +1,9 @@
 import React from 'react'
 import {
+  createStackNavigator,
+  StackNavigationOptions
+} from '@react-navigation/stack'
+import {
   BottomTabNavigationOptions,
   createBottomTabNavigator
 } from '@react-navigation/bottom-tabs'
@@ -14,9 +18,19 @@ export type BottomTabParamList = {
   Settings: undefined
 }
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>()
+export type SpotsStackParamList = {
+  Spots: undefined
+  SpotDetails: undefined
+}
 
-const options: BottomTabNavigationOptions = {
+const BottomTab = createBottomTabNavigator<BottomTabParamList>()
+const SpotsStack = createStackNavigator<SpotsStackParamList>()
+
+const stackOptions: StackNavigationOptions = {
+  headerShown: false
+}
+
+const bottomTabOptions: BottomTabNavigationOptions = {
   tabBarActiveTintColor: '#DB2777',
   tabBarInactiveTintColor: '#475569',
   headerShown: false
@@ -26,11 +40,18 @@ const TabBarIcon = (name: string, focused: boolean): JSX.Element => (
   <Icon name={name} size={20} color={focused ? '#DB2777' : '#475569'} />
 )
 
+const SpotsTabStack = () => (
+  <SpotsStack.Navigator screenOptions={stackOptions}>
+    <SpotsStack.Screen name='Spots' component={SpotsScreen} />
+    <SpotsStack.Screen name='SpotDetails' component={SpotsScreen} />
+  </SpotsStack.Navigator>
+)
+
 export const MainScreen = (): JSX.Element => (
-  <BottomTab.Navigator initialRouteName='Map' screenOptions={options}>
+  <BottomTab.Navigator initialRouteName='Map' screenOptions={bottomTabOptions}>
     <BottomTab.Screen
       name='Spots'
-      component={SpotsScreen}
+      component={SpotsTabStack}
       options={{ tabBarIcon: ({ focused }) => TabBarIcon('map-pin', focused) }}
     />
     <BottomTab.Screen
