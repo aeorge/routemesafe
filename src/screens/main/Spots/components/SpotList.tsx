@@ -7,7 +7,10 @@ import {
   Pressable,
   StyleSheet
 } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Feather'
+import { SpotsStackParamList } from '../../MainScreen'
 import { Spacer } from '../../../../components/Spacer'
 import { formatDate } from '../../../../helpers/formatDate'
 
@@ -15,7 +18,14 @@ type SpotListProps = {
   spots: any[]
 }
 
+type SpotDetailsScreenNavigationProp = StackNavigationProp<
+  SpotsStackParamList,
+  'Spots'
+>
+
 export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
+  const navigation = useNavigation<SpotDetailsScreenNavigationProp>()
+
   const VotingIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={14} color='#475569' />
   )
@@ -28,31 +38,29 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
     <Icon name='more-horizontal' size={20} color='#475569' />
   )
 
-  const handleMoreInfo = () => null
-
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       // ListEmptyComponent={() => <View></View>}
       // ListHeaderComponent={() => <View></View>}
       data={spots}
-      renderItem={({ index, item }) => (
+      renderItem={({ index, item: spot }) => (
         <View style={styles.spot} key={index}>
           <Image
             source={require('../../../../assets/images/spots/danger.png')}
             style={styles.typeIcon}
           />
           <View style={styles.spotInner}>
-            <Text style={styles.spotType}>{item.properties.type}</Text>
+            <Text style={styles.spotType}>{spot.properties.type}</Text>
             <Spacer height={8} />
-            <Text>{item.properties.comment}</Text>
+            <Text>{spot.properties.comment}</Text>
             <Spacer height={8} />
             <View style={styles.spotMeta}>
               <View style={styles.spotMetaTagContainer}>
                 <VotingIcon />
                 <View style={styles.spotMetaTag}>
                   <Text style={styles.spotMetaText}>
-                    {item.properties.voting}
+                    {spot.properties.voting}
                   </Text>
                 </View>
               </View>
@@ -60,25 +68,28 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
                 <ClockIcon />
                 <View style={styles.spotMetaTag}>
                   <Text style={styles.spotMetaText}>
-                    {formatDate(item.properties.date)}
+                    {formatDate(spot.properties.date)}
                   </Text>
                 </View>
               </View>
               <View
                 style={{
                   ...styles.spotMetaTag,
-                  backgroundColor: item.properties.status
+                  backgroundColor: spot.properties.status
                     ? '#BBF7D0'
                     : '#FECACA'
                 }}
               >
                 <Text style={styles.spotMetaText}>
-                  {item.properties.status ? 'Active' : 'Inactive'}
+                  {spot.properties.status ? 'Active' : 'Inactive'}
                 </Text>
               </View>
             </View>
           </View>
-          <Pressable onPress={handleMoreInfo} style={styles.moreButton}>
+          <Pressable
+            onPress={() => navigation.navigate('SpotDetails', spot)}
+            style={styles.spotDetailsButton}
+          >
             <EllipsisIcon />
           </Pressable>
         </View>
@@ -130,7 +141,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#1E293B'
   },
-  moreButton: {
+  spotDetailsButton: {
     alignSelf: 'flex-start'
   },
   separator: {
