@@ -51,6 +51,7 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
             source={require('../../../../assets/images/spots/danger.png')}
             style={styles.typeIcon}
           />
+          <Spacer width={12} />
           <View style={styles.spotInner}>
             <Text style={styles.spotType}>{spot.properties.type}</Text>
             <Spacer height={8} />
@@ -59,20 +60,24 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
             <View style={styles.spotMeta}>
               <View style={styles.spotMetaTagContainer}>
                 <VotingIcon />
+                <Spacer width={2} />
                 <View style={styles.spotMetaTag}>
                   <Text style={styles.spotMetaText}>
                     {spot.properties.voting}
                   </Text>
                 </View>
               </View>
+              <Spacer width={8} />
               <View style={styles.spotMetaTagContainer}>
                 <ClockIcon />
+                <Spacer width={2} />
                 <View style={styles.spotMetaTag}>
                   <Text style={styles.spotMetaText}>
                     {formatDate(spot.properties.date)}
                   </Text>
                 </View>
               </View>
+              <Spacer width={8} />
               <View
                 style={{
                   ...styles.spotMetaTag,
@@ -87,6 +92,7 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
               </View>
             </View>
           </View>
+          <Spacer width={12} />
           <Pressable
             onPress={() => navigation.navigate('SpotDetails', spot)}
             style={styles.spotDetailsButton}
@@ -112,8 +118,7 @@ const styles = StyleSheet.create({
     height: 32
   },
   spotInner: {
-    flex: 1,
-    marginHorizontal: 12
+    flex: 1
   },
   spotType: {
     fontWeight: 'bold'
@@ -125,14 +130,12 @@ const styles = StyleSheet.create({
   spotMetaTagContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 8
+    alignItems: 'center'
   },
   spotMetaTag: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 2,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 4,

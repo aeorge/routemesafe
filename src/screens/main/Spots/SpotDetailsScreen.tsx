@@ -43,6 +43,7 @@ export const SpotDetailsScreen = ({
           <Pressable onPress={handleBack}>
             <BackIcon />
           </Pressable>
+          <Spacer width={12} />
           <Text style={styles.heading}>Spot Details</Text>
         </View>
         <Spacer height={16} />
@@ -53,26 +54,29 @@ export const SpotDetailsScreen = ({
                 source={require('../../../assets/images/spots/danger.png')}
                 style={styles.typeIcon}
               />
+              <Spacer width={12} />
               <Text style={styles.spotType}>{spot?.properties.type}</Text>
             </View>
             <View style={styles.spotMeta}>
               <View style={styles.spotMetaTagContainer}>
                 <VotingIcon />
+                <Spacer width={2} />
                 <View style={styles.spotMetaTag}>
                   <Text style={styles.spotMetaText}>
                     {spot?.properties.voting}
                   </Text>
                 </View>
               </View>
+              <Spacer width={8} />
               <View
                 style={{
-                  ...styles.spotStatusTag,
+                  ...styles.spotMetaTag,
                   backgroundColor: spot?.properties.status
                     ? '#BBF7D0'
                     : '#FECACA'
                 }}
               >
-                <Text style={styles.spotStatusText}>
+                <Text style={styles.spotMetaText}>
                   {spot?.properties.status ? 'Active' : 'Inactive'}
                 </Text>
               </View>
@@ -131,7 +135,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   heading: {
-    marginLeft: 12,
     fontSize: 28,
     fontWeight: 'bold'
   },
@@ -151,8 +154,7 @@ const styles = StyleSheet.create({
   },
   typeIcon: {
     width: 32,
-    height: 32,
-    marginRight: 12
+    height: 32
   },
   spotType: {
     fontSize: 18,
@@ -165,33 +167,18 @@ const styles = StyleSheet.create({
   spotMetaTagContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 8
+    alignItems: 'center'
   },
   spotMetaTag: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 2,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 4,
     backgroundColor: '#E2E8F0'
   },
   spotMetaText: {
-    fontSize: 12,
-    color: '#1E293B'
-  },
-  spotStatusTag: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 2,
-    paddingHorizontal: 8,
-    paddingVertical: 2,
-    borderRadius: 4
-  },
-  spotStatusText: {
     fontSize: 12,
     color: '#1E293B'
   },
