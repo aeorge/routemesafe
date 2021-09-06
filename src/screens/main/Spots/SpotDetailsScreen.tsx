@@ -1,19 +1,34 @@
 import React from 'react'
-import { Image, StatusBar, StyleSheet, Text, View } from 'react-native'
+import {
+  Image,
+  Pressable,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native'
 import { Route } from '@react-navigation/routers'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/Feather'
+import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
 import { formatDate } from '../../../helpers/formatDate'
 
 type SpotDetailsScreenProps = {
   route: Route<'SpotDetails', any>
+  navigation: StackNavigationProp<SpotsStackParamList, 'Spots'>
 }
 
 export const SpotDetailsScreen = ({
-  route
+  route,
+  navigation
 }: SpotDetailsScreenProps): JSX.Element => {
   const spot = route.params
+
+  const handleBack = () => navigation.goBack()
+
+  const BackIcon = (): JSX.Element => <Icon name='arrow-left' size={24} />
 
   const VotingIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={14} color='#475569' />
@@ -24,7 +39,12 @@ export const SpotDetailsScreen = ({
       <View style={styles.inner}>
         <StatusBar barStyle='dark-content' />
         <Spacer height={16} />
-        <Text style={styles.heading}>Spot Details</Text>
+        <View style={styles.headingContainer}>
+          <Pressable onPress={handleBack}>
+            <BackIcon />
+          </Pressable>
+          <Text style={styles.heading}>Spot Details</Text>
+        </View>
         <Spacer height={16} />
         <View style={styles.detailsContainer}>
           <View style={styles.detailsHeadingContainer}>
@@ -105,7 +125,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '90%'
   },
+  headingContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   heading: {
+    marginLeft: 12,
     fontSize: 28,
     fontWeight: 'bold'
   },
