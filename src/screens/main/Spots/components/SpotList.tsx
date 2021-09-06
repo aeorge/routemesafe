@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Feather'
 import { SpotsStackParamList } from '../../MainScreen'
+import { SpotListHeader } from './SpotListHeader'
 import { Spacer } from '../../../../components/Spacer'
 import { formatDate } from '../../../../helpers/formatDate'
 
@@ -42,10 +43,10 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       // ListEmptyComponent={() => <View></View>}
-      // ListHeaderComponent={() => <View></View>}
+      ListHeaderComponent={SpotListHeader}
       data={spots}
       renderItem={({ index, item: spot }) => (
-        <View style={styles.spot} key={index}>
+        <View style={styles.spotContainer} key={index}>
           <Image
             source={require('../../../../assets/images/spots/danger.png')}
             style={styles.typeIcon}
@@ -99,7 +100,7 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
 }
 
 const styles = StyleSheet.create({
-  spot: {
+  spotContainer: {
     display: 'flex',
     flexDirection: 'row',
     minHeight: 60,
