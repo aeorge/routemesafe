@@ -39,6 +39,10 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
     <Icon name='more-horizontal' size={20} color='#475569' />
   )
 
+  const MapIcon = (): JSX.Element => (
+    <Icon name='map' size={20} color='#475569' />
+  )
+
   return (
     <FlatList
       ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -93,12 +97,14 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
             </View>
           </View>
           <Spacer width={12} />
-          <Pressable
-            onPress={() => navigation.navigate('SpotDetails', spot)}
-            style={styles.spotDetailsButton}
-          >
-            <EllipsisIcon />
-          </Pressable>
+          <View style={styles.spotActionContainer}>
+            <Pressable onPress={() => navigation.navigate('SpotDetails', spot)}>
+              <EllipsisIcon />
+            </Pressable>
+            <Pressable>
+              <MapIcon />
+            </Pressable>
+          </View>
         </View>
       )}
     />
@@ -145,8 +151,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#1E293B'
   },
-  spotDetailsButton: {
-    alignSelf: 'flex-start'
+  spotActionContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   separator: {
     borderWidth: 1,
