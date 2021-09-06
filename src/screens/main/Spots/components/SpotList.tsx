@@ -19,13 +19,13 @@ type SpotListProps = {
   spots: any[]
 }
 
-type SpotDetailsScreenNavigationProp = StackNavigationProp<
+type SpotListScreenNavigationProp = StackNavigationProp<
   SpotsStackParamList,
-  'Spots'
+  'SpotList'
 >
 
 export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
-  const navigation = useNavigation<SpotDetailsScreenNavigationProp>()
+  const navigation = useNavigation<SpotListScreenNavigationProp>()
 
   const VotingIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={14} color='#475569' />

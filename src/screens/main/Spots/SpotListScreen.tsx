@@ -6,7 +6,7 @@ import { Spacer } from '../../../components/Spacer'
 
 const data: any[] = []
 
-export const SpotsScreen = (): JSX.Element => (
+export const SpotListScreen = (): JSX.Element => (
   <SafeAreaView style={styles.container}>
     <View style={styles.inner}>
       <StatusBar barStyle='dark-content' />

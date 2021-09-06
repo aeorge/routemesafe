@@ -16,9 +16,14 @@ import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
 import { formatDate } from '../../../helpers/formatDate'
 
+type SpotDetailsScreenNavigationProp = StackNavigationProp<
+  SpotsStackParamList,
+  'SpotDetails'
+>
+
 type SpotDetailsScreenProps = {
   route: Route<'SpotDetails', any>
-  navigation: StackNavigationProp<SpotsStackParamList, 'Spots'>
+  navigation: SpotDetailsScreenNavigationProp
 }
 
 export const SpotDetailsScreen = ({

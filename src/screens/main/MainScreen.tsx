@@ -9,18 +9,18 @@ import {
 } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Feather'
 import { MapScreen } from './MapScreen'
-import { SpotsScreen } from './Spots/SpotsScreen'
+import { SpotListScreen } from './Spots/SpotListScreen'
 import { SpotDetailsScreen } from './Spots/SpotDetailsScreen'
 import { SettingsScreen } from './SettingsScreen'
 
 export type BottomTabParamList = {
   Map: undefined
-  SpotsStack: undefined
+  Spots: undefined
   Settings: undefined
 }
 
 export type SpotsStackParamList = {
-  Spots: undefined
+  SpotList: undefined
   SpotDetails: undefined
 }
 
@@ -43,7 +43,7 @@ const TabBarIcon = (name: string, focused: boolean): JSX.Element => (
 
 const SpotsTabStack = () => (
   <SpotsStack.Navigator screenOptions={stackOptions}>
-    <SpotsStack.Screen name='Spots' component={SpotsScreen} />
+    <SpotsStack.Screen name='SpotList' component={SpotListScreen} />
     <SpotsStack.Screen name='SpotDetails' component={SpotDetailsScreen} />
   </SpotsStack.Navigator>
 )
@@ -51,7 +51,7 @@ const SpotsTabStack = () => (
 export const MainScreen = (): JSX.Element => (
   <BottomTab.Navigator initialRouteName='Map' screenOptions={bottomTabOptions}>
     <BottomTab.Screen
-      name='SpotsStack'
+      name='Spots'
       component={SpotsTabStack}
       options={{ tabBarIcon: ({ focused }) => TabBarIcon('map-pin', focused) }}
     />
