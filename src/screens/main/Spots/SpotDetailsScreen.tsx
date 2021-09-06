@@ -120,8 +120,6 @@ export const SpotDetailsScreen = ({
               {formatDate(spot?.properties.date)}
             </Text>
           </View>
-          <Spacer height={16} />
-          <View></View>
         </View>
       </View>
     </SafeAreaView>
