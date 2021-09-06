@@ -120,6 +120,18 @@ export const SpotDetailsScreen = ({
               {formatDate(spot?.properties.date)}
             </Text>
           </View>
+          <Spacer height={16} />
+          <Text style={styles.detailsLabel}>Latitude</Text>
+          <Spacer height={8} />
+          <Text style={styles.detailsText}>
+            {spot?.geometry.coordinates[1]}
+          </Text>
+          <Spacer height={16} />
+          <Text style={styles.detailsLabel}>Longitude</Text>
+          <Spacer height={8} />
+          <Text style={styles.detailsText}>
+            {spot?.geometry.coordinates[0]}
+          </Text>
         </View>
       </View>
     </SafeAreaView>
@@ -188,15 +200,15 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#1E293B'
   },
+  image: {
+    width: 60,
+    height: 100,
+    borderRadius: 4
+  },
   detailsLabel: {
     fontWeight: 'bold'
   },
   detailsText: {
     color: '#475569'
-  },
-  image: {
-    width: 60,
-    height: 100,
-    borderRadius: 4
   }
 })
