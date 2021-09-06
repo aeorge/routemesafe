@@ -197,7 +197,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#E2E8F0'
   },
   spotMetaText: {
-    fontSize: 12,
     color: '#1E293B'
   },
   image: {
