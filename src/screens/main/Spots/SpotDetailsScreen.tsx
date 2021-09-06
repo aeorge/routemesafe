@@ -1,5 +1,6 @@
 import React from 'react'
 import {
+  FlatList,
   Image,
   Pressable,
   StatusBar,
@@ -86,17 +87,19 @@ export const SpotDetailsScreen = ({
           <View>
             <Text style={styles.detailsLabel}>Images</Text>
             <Spacer height={8} />
-            {spot?.properties.images.length ? (
-              <View style={styles.imageContainer}>
-                {spot.properties.images.map((image: string, index: number) => (
-                  <View key={index}>
-                    <Image source={{ uri: image }} style={styles.image} />
-                  </View>
-                ))}
-              </View>
-            ) : (
-              <Text style={styles.detailsText}>No images yet</Text>
-            )}
+            <FlatList
+              ItemSeparatorComponent={() => <Spacer width={12} />}
+              ListEmptyComponent={() => (
+                <Text style={styles.detailsText}>No images yet</Text>
+              )}
+              data={spot?.properties.images}
+              horizontal
+              renderItem={({ index, item: image }) => (
+                <View key={index}>
+                  <Image source={{ uri: image }} style={styles.image} />
+                </View>
+              )}
+            />
           </View>
           <Spacer height={16} />
           <View>
@@ -188,14 +191,9 @@ const styles = StyleSheet.create({
   detailsText: {
     color: '#475569'
   },
-  imageContainer: {
-    display: 'flex',
-    flexDirection: 'row'
-  },
   image: {
     width: 60,
     height: 100,
-    marginRight: 12,
     borderRadius: 4
   }
 })
