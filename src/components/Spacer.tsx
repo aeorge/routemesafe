@@ -2,9 +2,10 @@ import React from 'react'
 import { View } from 'react-native'
 
 type SpacerProps = {
-  height: number
+  width?: number
+  height?: number
 }
 
-export const Spacer = ({ height }: SpacerProps): JSX.Element => (
-  <View style={{ height }} />
+export const Spacer = ({ width, height }: SpacerProps): JSX.Element => (
+  <View style={{ width, height }} />
 )
