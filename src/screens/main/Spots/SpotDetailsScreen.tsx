@@ -38,14 +38,14 @@ export const SpotDetailsScreen = ({
 
   const handleBack = () => navigation.goBack()
 
-  const BackIcon = (): JSX.Element => <Icon name='arrow-left' size={24} />
+  const BackIcon = (): JSX.Element => <Icon name='arrow-left' size={32} />
 
   const SeverityIcon = (): JSX.Element => (
-    <Icon name='chevrons-up' size={14} color='#475569' />
+    <Icon name='chevrons-up' size={16} color='#475569' />
   )
 
   const VotingIcon = (): JSX.Element => (
-    <Icon name='arrow-up' size={14} color='#475569' />
+    <Icon name='arrow-up' size={16} color='#475569' />
   )
 
   return (
@@ -71,27 +71,27 @@ export const SpotDetailsScreen = ({
               <Spacer width={12} />
               <Text style={styles.spotType}>{spot?.properties.type}</Text>
             </View>
-            <View style={styles.spotMeta}>
-              <View style={styles.spotMetaTagContainer}>
+            <View style={styles.meta}>
+              <View style={styles.metaTagContainer}>
                 <SeverityIcon />
                 <Spacer width={2} />
                 <View
                   style={{
-                    ...styles.spotMetaTag,
+                    ...styles.metaTag,
                     backgroundColor: getSeverityColor(spot?.properties.severity)
                   }}
                 >
-                  <Text style={styles.spotMetaText}>
+                  <Text style={styles.metaTagText}>
                     {spot?.properties.severity}
                   </Text>
                 </View>
               </View>
               <Spacer width={8} />
-              <View style={styles.spotMetaTagContainer}>
+              <View style={styles.metaTagContainer}>
                 <VotingIcon />
                 <Spacer width={2} />
-                <View style={styles.spotMetaTag}>
-                  <Text style={styles.spotMetaText}>
+                <View style={styles.metaTag}>
+                  <Text style={styles.metaTagText}>
                     {spot?.properties.voting}
                   </Text>
                 </View>
@@ -99,11 +99,11 @@ export const SpotDetailsScreen = ({
               <Spacer width={8} />
               <View
                 style={{
-                  ...styles.spotMetaTag,
+                  ...styles.metaTag,
                   backgroundColor: getStatusColor(spot?.properties.status)
                 }}
               >
-                <Text style={styles.spotMetaText}>
+                <Text style={styles.metaTagText}>
                   {getStatusText(spot?.properties.status)}
                 </Text>
               </View>
@@ -151,36 +151,38 @@ export const SpotDetailsScreen = ({
             <Text style={styles.detailsText}>{spot?.properties.comment}</Text>
           </View>
           <Spacer height={16} />
-          <View>
-            <Text style={styles.detailsLabel}>Created At</Text>
-            <Spacer height={8} />
-            <Text style={styles.detailsText}>
-              {formatDateTime(spot?.properties.createdAt)}
-            </Text>
+          <View style={styles.detailsHorizontalContainer}>
+            <View style={styles.detailsHorizontalInner}>
+              <Text style={styles.detailsLabel}>Created At</Text>
+              <Spacer height={8} />
+              <Text style={styles.detailsText}>
+                {formatDateTime(spot?.properties.createdAt)}
+              </Text>
+            </View>
+            <View style={styles.detailsHorizontalInner}>
+              <Text style={styles.detailsLabel}>Updated At</Text>
+              <Spacer height={8} />
+              <Text style={styles.detailsText}>
+                {formatDateTime(spot?.properties.updatedAt)}
+              </Text>
+            </View>
           </View>
           <Spacer height={16} />
-          <View>
-            <Text style={styles.detailsLabel}>Updated At</Text>
-            <Spacer height={8} />
-            <Text style={styles.detailsText}>
-              {formatDateTime(spot?.properties.updatedAt)}
-            </Text>
-          </View>
-          <Spacer height={16} />
-          <View>
-            <Text style={styles.detailsLabel}>Latitude</Text>
-            <Spacer height={8} />
-            <Text style={styles.detailsText}>
-              {spot?.geometry.coordinates[1]}
-            </Text>
-          </View>
-          <Spacer height={16} />
-          <View>
-            <Text style={styles.detailsLabel}>Longitude</Text>
-            <Spacer height={8} />
-            <Text style={styles.detailsText}>
-              {spot?.geometry.coordinates[0]}
-            </Text>
+          <View style={styles.detailsHorizontalContainer}>
+            <View style={styles.detailsHorizontalInner}>
+              <Text style={styles.detailsLabel}>Latitude</Text>
+              <Spacer height={8} />
+              <Text style={styles.detailsText}>
+                {spot?.geometry.coordinates[1]}
+              </Text>
+            </View>
+            <View style={styles.detailsHorizontalInner}>
+              <Text style={styles.detailsLabel}>Longitude</Text>
+              <Spacer height={8} />
+              <Text style={styles.detailsText}>
+                {spot?.geometry.coordinates[0]}
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -225,19 +227,19 @@ const styles = StyleSheet.create({
     height: 32
   },
   spotType: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold'
   },
-  spotMeta: {
+  meta: {
     display: 'flex',
     flexDirection: 'row'
   },
-  spotMetaTagContainer: {
+  metaTagContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
   },
-  spotMetaTag: {
+  metaTag: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -246,7 +248,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#E2E8F0'
   },
-  spotMetaText: {
+  metaTagText: {
+    fontSize: 16,
     color: '#1E293B'
   },
   mapContainer: {
@@ -256,7 +259,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: 150
+    height: 200
   },
   image: {
     width: 60,
@@ -264,9 +267,18 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
   detailsLabel: {
+    fontSize: 16,
     fontWeight: 'bold'
   },
   detailsText: {
+    fontSize: 16,
     color: '#475569'
+  },
+  detailsHorizontalContainer: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  detailsHorizontalInner: {
+    flex: 1
   }
 })

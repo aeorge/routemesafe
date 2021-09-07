@@ -30,16 +30,20 @@ type SpotListScreenNavigationProp = StackNavigationProp<
 export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
   const navigation = useNavigation<SpotListScreenNavigationProp>()
 
+  const CommentIcon = (): JSX.Element => (
+    <Icon name='message-circle' size={16} color='#475569' />
+  )
+
   const SeverityIcon = (): JSX.Element => (
-    <Icon name='chevrons-up' size={14} color='#475569' />
+    <Icon name='chevrons-up' size={16} color='#475569' />
   )
 
   const VotingIcon = (): JSX.Element => (
-    <Icon name='arrow-up' size={14} color='#475569' />
+    <Icon name='arrow-up' size={16} color='#475569' />
   )
 
   const ClockIcon = (): JSX.Element => (
-    <Icon name='clock' size={14} color='#475569' />
+    <Icon name='clock' size={16} color='#475569' />
   )
 
   const EllipsisIcon = (): JSX.Element => (
@@ -57,48 +61,54 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
       ListHeaderComponent={SpotListHeader}
       data={spots}
       renderItem={({ index, item: spot }) => (
-        <View style={styles.spotContainer} key={index}>
-          <Image
-            source={require('../../../../assets/images/spots/danger.png')}
-            style={styles.typeIcon}
-          />
-          <Spacer width={12} />
-          <View style={styles.spotInner}>
-            <Text style={styles.spotType}>{spot.properties.type}</Text>
-            <Spacer height={8} />
-            <Text>{spot.properties.comment}</Text>
-            <Spacer height={8} />
-            <View style={styles.spotMeta}>
-              <View style={styles.spotMetaTagContainer}>
+        <View style={styles.container} key={index}>
+          <View style={styles.detailsContainer}>
+            <View style={styles.heading}>
+              <Image
+                source={require('../../../../assets/images/spots/danger.png')}
+                style={styles.typeIcon}
+              />
+              <Spacer width={8} />
+              <Text style={styles.typeText}>{spot.properties.type}</Text>
+            </View>
+            <Spacer height={12} />
+            <View style={styles.commentContainer}>
+              <CommentIcon />
+              <Spacer width={2} />
+              <Text style={styles.comment}>{spot.properties.comment}</Text>
+            </View>
+            <Spacer height={12} />
+            <View style={styles.meta}>
+              <View style={styles.metaTagContainer}>
                 <SeverityIcon />
                 <Spacer width={2} />
                 <View
                   style={{
-                    ...styles.spotMetaTag,
+                    ...styles.metaTag,
                     backgroundColor: getSeverityColor(spot.properties.severity)
                   }}
                 >
-                  <Text style={styles.spotMetaText}>
+                  <Text style={styles.metaTagText}>
                     {spot.properties.severity}
                   </Text>
                 </View>
               </View>
               <Spacer width={8} />
-              <View style={styles.spotMetaTagContainer}>
+              <View style={styles.metaTagContainer}>
                 <VotingIcon />
                 <Spacer width={2} />
-                <View style={styles.spotMetaTag}>
-                  <Text style={styles.spotMetaText}>
+                <View style={styles.metaTag}>
+                  <Text style={styles.metaTagText}>
                     {spot.properties.voting}
                   </Text>
                 </View>
               </View>
               <Spacer width={8} />
-              <View style={styles.spotMetaTagContainer}>
+              <View style={styles.metaTagContainer}>
                 <ClockIcon />
                 <Spacer width={2} />
-                <View style={styles.spotMetaTag}>
-                  <Text style={styles.spotMetaText}>
+                <View style={styles.metaTag}>
+                  <Text style={styles.metaTagText}>
                     {formatDate(spot.properties.createdAt)}
                   </Text>
                 </View>
@@ -106,11 +116,11 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
               <Spacer width={8} />
               <View
                 style={{
-                  ...styles.spotMetaTag,
+                  ...styles.metaTag,
                   backgroundColor: getStatusColor(spot.properties.status)
                 }}
               >
-                <Text style={styles.spotMetaText}>
+                <Text style={styles.metaTagText}>
                   {getStatusText(spot.properties.status)}
                 </Text>
               </View>
@@ -132,33 +142,48 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
 }
 
 const styles = StyleSheet.create({
-  spotContainer: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
     minHeight: 60,
-    padding: 12
+    paddingHorizontal: 12,
+    paddingVertical: 18
+  },
+  detailsContainer: {
+    flex: 1
+  },
+  heading: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   typeIcon: {
     alignSelf: 'flex-start',
     width: 32,
     height: 32
   },
-  spotInner: {
-    flex: 1
-  },
-  spotType: {
+  typeText: {
+    fontSize: 16,
     fontWeight: 'bold'
   },
-  spotMeta: {
-    display: 'flex',
-    flexDirection: 'row'
-  },
-  spotMetaTagContainer: {
+  commentContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
   },
-  spotMetaTag: {
+  comment: {
+    fontSize: 16
+  },
+  meta: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  metaTagContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  metaTag: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -167,8 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#E2E8F0'
   },
-  spotMetaText: {
-    fontSize: 12,
+  metaTagText: {
     color: '#1E293B'
   },
   spotActionContainer: {
@@ -177,7 +201,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   separator: {
-    borderWidth: 1,
+    borderWidth: 2,
     borderRadius: 2,
     borderColor: '#E2E8F0'
   }

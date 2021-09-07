@@ -38,7 +38,7 @@ const bottomTabOptions: BottomTabNavigationOptions = {
 }
 
 const TabBarIcon = (name: string, focused: boolean): JSX.Element => (
-  <Icon name={name} size={20} color={focused ? '#DB2777' : '#475569'} />
+  <Icon name={name} size={24} color={focused ? '#DB2777' : '#475569'} />
 )
 
 const SpotsTabStack = () => (

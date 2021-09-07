@@ -5,27 +5,27 @@ import { Spacer } from '../../../../components/Spacer'
 
 export const SpotListHeader = (): JSX.Element => {
   const FilterIcon = (): JSX.Element => (
-    <Icon name='filter' size={14} color='#475569' />
+    <Icon name='filter' size={16} color='#475569' />
   )
 
   return (
-    <View style={styles.listHeaderContainer}>
-      <Pressable style={styles.listHeaderButton}>
+    <View style={styles.container}>
+      <Pressable style={styles.button}>
         <FilterIcon />
         <Spacer width={4} />
-        <Text>Filter</Text>
+        <Text style={styles.buttonText}>Filter</Text>
       </Pressable>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  listHeaderContainer: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end'
   },
-  listHeaderButton: {
+  button: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -33,5 +33,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 4,
     backgroundColor: '#E2E8F0'
+  },
+  buttonText: {
+    fontSize: 16
   }
 })
