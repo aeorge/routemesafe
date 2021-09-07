@@ -15,6 +15,8 @@ import Icon from 'react-native-vector-icons/Feather'
 import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
 import { formatDate } from '../../../helpers/formatDate'
+import { getStatusColor } from '../../../helpers/getStatusColor'
+import { getStatusText } from '../../../helpers/getStatusText'
 
 type SpotDetailsScreenNavigationProp = StackNavigationProp<
   SpotsStackParamList,
@@ -77,13 +79,11 @@ export const SpotDetailsScreen = ({
               <View
                 style={{
                   ...styles.spotMetaTag,
-                  backgroundColor: spot?.properties.status
-                    ? '#BBF7D0'
-                    : '#FECACA'
+                  backgroundColor: getStatusColor(spot?.properties.status)
                 }}
               >
                 <Text style={styles.spotMetaText}>
-                  {spot?.properties.status ? 'Active' : 'Inactive'}
+                  {getStatusText(spot?.properties.status)}
                 </Text>
               </View>
             </View>
