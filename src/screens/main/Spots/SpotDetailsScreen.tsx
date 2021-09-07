@@ -141,6 +141,14 @@ export const SpotDetailsScreen = ({
             </Text>
           </View>
           <Spacer height={16} />
+          <View>
+            <Text style={styles.detailsLabel}>Updated At</Text>
+            <Spacer height={8} />
+            <Text style={styles.detailsText}>
+              {formatDateTime(spot?.properties.updatedAt)}
+            </Text>
+          </View>
+          <Spacer height={16} />
           <Text style={styles.detailsLabel}>Latitude</Text>
           <Spacer height={8} />
           <Text style={styles.detailsText}>
