@@ -114,7 +114,17 @@ export const SpotDetailsScreen = ({
             <MapboxGL.MapView
               style={styles.map}
               styleURL={MapboxGL.StyleURL.Light}
-            />
+            >
+              <MapboxGL.Camera
+                defaultSettings={{
+                  centerCoordinate: [
+                    spot?.geometry.coordinates[0],
+                    spot?.geometry.coordinates[1]
+                  ],
+                  zoomLevel: 16
+                }}
+              />
+            </MapboxGL.MapView>
           </View>
           <Spacer height={16} />
           <View>
