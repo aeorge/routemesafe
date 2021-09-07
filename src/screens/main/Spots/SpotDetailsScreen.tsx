@@ -15,6 +15,7 @@ import Icon from 'react-native-vector-icons/Feather'
 import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
 import { formatDate } from '../../../helpers/formatDate'
+import { getSeverityColor } from '../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../helpers/getStatusColor'
 import { getStatusText } from '../../../helpers/getStatusText'
 
@@ -37,6 +38,10 @@ export const SpotDetailsScreen = ({
   const handleBack = () => navigation.goBack()
 
   const BackIcon = (): JSX.Element => <Icon name='arrow-left' size={24} />
+
+  const SeverityIcon = (): JSX.Element => (
+    <Icon name='chevrons-up' size={14} color='#475569' />
+  )
 
   const VotingIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={14} color='#475569' />
@@ -66,6 +71,21 @@ export const SpotDetailsScreen = ({
               <Text style={styles.spotType}>{spot?.properties.type}</Text>
             </View>
             <View style={styles.spotMeta}>
+              <View style={styles.spotMetaTagContainer}>
+                <SeverityIcon />
+                <Spacer width={2} />
+                <View
+                  style={{
+                    ...styles.spotMetaTag,
+                    backgroundColor: getSeverityColor(spot?.properties.severity)
+                  }}
+                >
+                  <Text style={styles.spotMetaText}>
+                    {spot?.properties.severity}
+                  </Text>
+                </View>
+              </View>
+              <Spacer width={8} />
               <View style={styles.spotMetaTagContainer}>
                 <VotingIcon />
                 <Spacer width={2} />

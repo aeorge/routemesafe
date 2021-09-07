@@ -14,6 +14,7 @@ import { SpotsStackParamList } from '../../MainScreen'
 import { SpotListHeader } from './SpotListHeader'
 import { Spacer } from '../../../../components/Spacer'
 import { formatDate } from '../../../../helpers/formatDate'
+import { getSeverityColor } from '../../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../../helpers/getStatusColor'
 import { getStatusText } from '../../../../helpers/getStatusText'
 
@@ -28,6 +29,10 @@ type SpotListScreenNavigationProp = StackNavigationProp<
 
 export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
   const navigation = useNavigation<SpotListScreenNavigationProp>()
+
+  const SeverityIcon = (): JSX.Element => (
+    <Icon name='chevrons-up' size={14} color='#475569' />
+  )
 
   const VotingIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={14} color='#475569' />
@@ -64,6 +69,21 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
             <Text>{spot.properties.comment}</Text>
             <Spacer height={8} />
             <View style={styles.spotMeta}>
+              <View style={styles.spotMetaTagContainer}>
+                <SeverityIcon />
+                <Spacer width={2} />
+                <View
+                  style={{
+                    ...styles.spotMetaTag,
+                    backgroundColor: getSeverityColor(spot.properties.severity)
+                  }}
+                >
+                  <Text style={styles.spotMetaText}>
+                    {spot.properties.severity}
+                  </Text>
+                </View>
+              </View>
+              <Spacer width={8} />
               <View style={styles.spotMetaTagContainer}>
                 <VotingIcon />
                 <Spacer width={2} />
