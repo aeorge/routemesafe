@@ -14,7 +14,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/Feather'
 import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
-import { formatDate } from '../../../helpers/formatDate'
+import { formatDateTime } from '../../../helpers/formatDateTime'
 import { getSeverityColor } from '../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../helpers/getStatusColor'
 import { getStatusText } from '../../../helpers/getStatusText'
@@ -134,10 +134,10 @@ export const SpotDetailsScreen = ({
           </View>
           <Spacer height={16} />
           <View>
-            <Text style={styles.detailsLabel}>Date</Text>
+            <Text style={styles.detailsLabel}>Created At</Text>
             <Spacer height={8} />
             <Text style={styles.detailsText}>
-              {formatDate(spot?.properties.date)}
+              {formatDateTime(spot?.properties.createdAt)}
             </Text>
           </View>
           <Spacer height={16} />

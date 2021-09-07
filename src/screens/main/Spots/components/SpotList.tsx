@@ -99,7 +99,7 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
                 <Spacer width={2} />
                 <View style={styles.spotMetaTag}>
                   <Text style={styles.spotMetaText}>
-                    {formatDate(spot.properties.date)}
+                    {formatDate(spot.properties.createdAt)}
                   </Text>
                 </View>
               </View>
