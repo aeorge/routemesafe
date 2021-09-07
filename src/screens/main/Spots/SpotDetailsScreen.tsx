@@ -11,6 +11,7 @@ import {
 import { Route } from '@react-navigation/routers'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import MapboxGL from '@react-native-mapbox-gl/maps'
 import Icon from 'react-native-vector-icons/Feather'
 import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
@@ -109,6 +110,13 @@ export const SpotDetailsScreen = ({
             </View>
           </View>
           <Spacer height={16} />
+          <View style={styles.mapContainer}>
+            <MapboxGL.MapView
+              style={styles.map}
+              styleURL={MapboxGL.StyleURL.Light}
+            />
+          </View>
+          <Spacer height={16} />
           <View>
             <Text style={styles.detailsLabel}>Images</Text>
             <Spacer height={8} />
@@ -149,17 +157,21 @@ export const SpotDetailsScreen = ({
             </Text>
           </View>
           <Spacer height={16} />
-          <Text style={styles.detailsLabel}>Latitude</Text>
-          <Spacer height={8} />
-          <Text style={styles.detailsText}>
-            {spot?.geometry.coordinates[1]}
-          </Text>
+          <View>
+            <Text style={styles.detailsLabel}>Latitude</Text>
+            <Spacer height={8} />
+            <Text style={styles.detailsText}>
+              {spot?.geometry.coordinates[1]}
+            </Text>
+          </View>
           <Spacer height={16} />
-          <Text style={styles.detailsLabel}>Longitude</Text>
-          <Spacer height={8} />
-          <Text style={styles.detailsText}>
-            {spot?.geometry.coordinates[0]}
-          </Text>
+          <View>
+            <Text style={styles.detailsLabel}>Longitude</Text>
+            <Spacer height={8} />
+            <Text style={styles.detailsText}>
+              {spot?.geometry.coordinates[0]}
+            </Text>
+          </View>
         </View>
       </View>
     </SafeAreaView>
@@ -226,6 +238,15 @@ const styles = StyleSheet.create({
   },
   spotMetaText: {
     color: '#1E293B'
+  },
+  mapContainer: {
+    borderWidth: 4,
+    borderRadius: 4,
+    borderColor: '#E2E8F0'
+  },
+  map: {
+    width: '100%',
+    height: 150
   },
   image: {
     width: 60,
