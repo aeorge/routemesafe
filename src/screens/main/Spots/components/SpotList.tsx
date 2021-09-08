@@ -24,7 +24,7 @@ type SpotListProps = {
 
 type SpotListScreenNavigationProp = StackNavigationProp<
   SpotsStackParamList,
-  'SpotList'
+  'Spots'
 >
 
 export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
@@ -128,7 +128,9 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
           </View>
           <Spacer width={12} />
           <View style={styles.spotActionContainer}>
-            <Pressable onPress={() => navigation.navigate('SpotDetails', spot)}>
+            <Pressable
+              onPress={() => navigation.navigate('Spot Details', spot)}
+            >
               <EllipsisIcon />
             </Pressable>
             <Pressable>

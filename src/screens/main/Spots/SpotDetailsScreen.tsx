@@ -22,7 +22,7 @@ import { getStatusText } from '../../../helpers/getStatusText'
 
 type SpotDetailsScreenNavigationProp = StackNavigationProp<
   SpotsStackParamList,
-  'SpotDetails'
+  'Spot Details'
 >
 
 type SpotDetailsScreenProps = {
@@ -123,6 +123,13 @@ export const SpotDetailsScreen = ({
                   ],
                   zoomLevel: 16
                 }}
+              />
+              <MapboxGL.MarkerView
+                id={spot?._id}
+                coordinate={[
+                  spot?.geometry.coordinates[0],
+                  spot?.geometry.coordinates[1]
+                ]}
               />
             </MapboxGL.MapView>
           </View>
