@@ -356,7 +356,7 @@ PODS:
     - React-Core
   - RNGestureHandler (1.10.3):
     - React-Core
-  - RNReanimated (2.2.0):
+  - RNReanimated (2.2.1):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -385,7 +385,7 @@ PODS:
     - React-RCTVibration
     - ReactCommon/turbomodule/core
     - Yoga
-  - RNScreens (3.6.0):
+  - RNScreens (3.7.0):
     - React-Core
     - React-RCTImage
   - RNVectorIcons (8.1.0):
@@ -594,8 +594,8 @@ SPEC CHECKSUMS:
   ReactCommon: eafed38eec7b591c31751bfa7494801618460459
   RNCMaskedView: c298b644a10c0c142055b3ae24d83879ecb13ccd
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNReanimated: 7245c2ff6dca3b42b6f77e800adf85ce68532759
-  RNScreens: eb0dfb2d6b21d2d7f980ad46b14eb306d2f1062e
+  RNReanimated: d29057cf85e771be4f0180ba1d00a7185e423a7d
+  RNScreens: 2a71d74b4e530f051f5684c8111d7591176722cf
   RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
