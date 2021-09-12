@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
 import { Pressable, StatusBar, StyleSheet, View } from 'react-native'
+import { StackNavigationProp } from '@react-navigation/stack'
 import MapboxGL, {
   CameraProps,
   CameraSettings,
+  OnPressEvent,
   RegionPayload
 } from '@react-native-mapbox-gl/maps'
 import Icon from 'react-native-vector-icons/Feather'
+import { MapStackParamList } from '../MainScreen'
+
+type MapScreenNavigationProp = StackNavigationProp<MapStackParamList, 'Map'>
+
+type MapScreenProps = {
+  navigation: MapScreenNavigationProp
+}
 
 MapboxGL.setAccessToken('')
 
@@ -19,7 +28,7 @@ const mapSettings: CameraProps = {
   maxZoomLevel: 20
 }
 
-export const MapScreen = (): JSX.Element => {
+export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
   const [followUserLocation, setFollowUserLocation] = useState<boolean>(true)
 
   const handleRegionWillChange = (
@@ -32,6 +41,11 @@ export const MapScreen = (): JSX.Element => {
 
   const handleFollowUserLocation = () => {
     setFollowUserLocation(!followUserLocation)
+  }
+
+  const handleSpotDetails = (event: OnPressEvent) => {
+    const spot = event.features[0]
+    navigation.navigate('Spot Details Modal', spot)
   }
 
   const NavigationIcon = (): JSX.Element => (
@@ -60,6 +74,7 @@ export const MapScreen = (): JSX.Element => {
         <MapboxGL.ShapeSource
           id='spots'
           shape={{ type: 'FeatureCollection', features: [] }}
+          onPress={(event) => handleSpotDetails(event)}
         >
           <MapboxGL.SymbolLayer
             id='danger'

@@ -26,7 +26,7 @@ type SpotDetailsScreenNavigationProp = StackNavigationProp<
 >
 
 type SpotDetailsScreenProps = {
-  route: Route<'SpotDetails', any>
+  route: Route<'Spot Details', any>
   navigation: SpotDetailsScreenNavigationProp
 }
 
