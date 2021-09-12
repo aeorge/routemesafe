@@ -65,7 +65,7 @@ export const MapScreen = (): JSX.Element => {
             id='danger'
             filter={['==', 'type', 'danger']}
             style={{
-              iconImage: require('../../assets/images/spots/danger.png'),
+              iconImage: require('../../../assets/images/spots/danger.png'),
               iconSize: 0.1,
               iconAllowOverlap: true
             }}
@@ -74,7 +74,7 @@ export const MapScreen = (): JSX.Element => {
             id='construction'
             filter={['==', 'type', 'construction']}
             style={{
-              iconImage: require('../../assets/images/spots/construction.png'),
+              iconImage: require('../../../assets/images/spots/construction.png'),
               iconSize: 0.1,
               iconAllowOverlap: true
             }}
@@ -83,7 +83,7 @@ export const MapScreen = (): JSX.Element => {
             id='uneven'
             filter={['==', 'type', 'uneven']}
             style={{
-              iconImage: require('../../assets/images/spots/uneven.png'),
+              iconImage: require('../../../assets/images/spots/uneven.png'),
               iconSize: 0.1,
               iconAllowOverlap: true
             }}
@@ -92,7 +92,7 @@ export const MapScreen = (): JSX.Element => {
             id='narrow'
             filter={['==', 'type', 'narrow']}
             style={{
-              iconImage: require('../../assets/images/spots/narrow.png'),
+              iconImage: require('../../../assets/images/spots/narrow.png'),
               iconSize: 0.1,
               iconAllowOverlap: true
             }}

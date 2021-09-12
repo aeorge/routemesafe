@@ -8,7 +8,7 @@ import {
   createBottomTabNavigator
 } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Feather'
-import { MapScreen } from './MapScreen'
+import { MapScreen } from './Map/MapScreen'
 import { SpotsScreen } from './Spots/SpotsScreen'
 import { SpotDetailsScreen } from './Spots/SpotDetailsScreen'
 import { SettingsScreen } from './SettingsScreen'
@@ -24,8 +24,13 @@ export type SpotsStackParamList = {
   'Spot Details': undefined
 }
 
+export type MapStackParamList = {
+  Map: undefined
+}
+
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 const SpotsStack = createStackNavigator<SpotsStackParamList>()
+const MapStack = createStackNavigator<MapStackParamList>()
 
 const stackOptions: StackNavigationOptions = {
   headerShown: false
@@ -48,6 +53,14 @@ const SpotsTabStack = () => (
   </SpotsStack.Navigator>
 )
 
+const MapTabStack = () => (
+  <MapStack.Navigator>
+    <MapStack.Group>
+      <MapStack.Screen name='Map' component={MapScreen} />
+    </MapStack.Group>
+  </MapStack.Navigator>
+)
+
 export const MainScreen = (): JSX.Element => (
   <BottomTab.Navigator
     initialRouteName='Map Tab'
@@ -63,7 +76,7 @@ export const MainScreen = (): JSX.Element => (
     />
     <BottomTab.Screen
       name='Map Tab'
-      component={MapScreen}
+      component={MapTabStack}
       options={{
         tabBarIcon: ({ focused }) => TabBarIcon('map', focused),
         tabBarLabel: 'Map'

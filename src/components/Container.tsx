@@ -36,12 +36,14 @@ export const Container = (): JSX.Element => {
     <NavigationContainer>
       <RootStack.Navigator screenOptions={options}>
         {user === null ? (
-          <>
+          <RootStack.Group>
             <AuthStack.Screen name='SignIn' component={SignInScreen} />
             <AuthStack.Screen name='SignUp' component={SignUpScreen} />
-          </>
+          </RootStack.Group>
         ) : (
-          <MainStack.Screen name='Main' component={MainScreen} />
+          <RootStack.Group>
+            <MainStack.Screen name='Main' component={MainScreen} />
+          </RootStack.Group>
         )}
       </RootStack.Navigator>
     </NavigationContainer>
