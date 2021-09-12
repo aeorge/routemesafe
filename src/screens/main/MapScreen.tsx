@@ -57,6 +57,47 @@ export const MapScreen = (): JSX.Element => {
           {...mapSettings}
         />
         <MapboxGL.UserLocation renderMode='native' />
+        <MapboxGL.ShapeSource
+          id='spots'
+          shape={{ type: 'FeatureCollection', features: [] }}
+        >
+          <MapboxGL.SymbolLayer
+            id='danger'
+            filter={['==', 'type', 'danger']}
+            style={{
+              iconImage: require('../../assets/images/spots/danger.png'),
+              iconSize: 0.1,
+              iconAllowOverlap: true
+            }}
+          />
+          <MapboxGL.SymbolLayer
+            id='construction'
+            filter={['==', 'type', 'construction']}
+            style={{
+              iconImage: require('../../assets/images/spots/construction.png'),
+              iconSize: 0.1,
+              iconAllowOverlap: true
+            }}
+          />
+          <MapboxGL.SymbolLayer
+            id='uneven'
+            filter={['==', 'type', 'uneven']}
+            style={{
+              iconImage: require('../../assets/images/spots/uneven.png'),
+              iconSize: 0.1,
+              iconAllowOverlap: true
+            }}
+          />
+          <MapboxGL.SymbolLayer
+            id='narrow'
+            filter={['==', 'type', 'narrow']}
+            style={{
+              iconImage: require('../../assets/images/spots/narrow.png'),
+              iconSize: 0.1,
+              iconAllowOverlap: true
+            }}
+          />
+        </MapboxGL.ShapeSource>
         <Pressable
           onPress={handleFollowUserLocation}
           style={styles.followUserLocationButton}
