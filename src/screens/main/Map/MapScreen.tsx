@@ -126,7 +126,8 @@ export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFFFFF'
   },
   map: {
     flex: 1

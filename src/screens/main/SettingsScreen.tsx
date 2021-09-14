@@ -28,7 +28,8 @@ export const SettingsScreen = (): JSX.Element => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#FFFFFF'
   },
   inner: {
     flex: 1,
