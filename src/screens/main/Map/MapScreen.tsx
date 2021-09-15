@@ -7,6 +7,7 @@ import MapboxGL, {
   OnPressEvent,
   RegionPayload
 } from '@react-native-mapbox-gl/maps'
+import Geolocation from 'react-native-geolocation-service'
 import Icon from 'react-native-vector-icons/Feather'
 import { MapStackParamList } from '../MainScreen'
 
@@ -39,14 +40,33 @@ export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
     }
   }
 
-  const handleFollowUserLocation = () => {
-    setFollowUserLocation(!followUserLocation)
-  }
-
   const handleSpotDetails = (event: OnPressEvent) => {
     const spot = event.features[0]
     navigation.navigate('Spot Details Modal', spot)
   }
+
+  const handleAddSpot = () => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        navigation.navigate('Add Spot Modal', [
+          position.coords.longitude,
+          position.coords.latitude
+        ])
+      },
+      (error) => {
+        console.error(error)
+      },
+      { enableHighAccuracy: true }
+    )
+  }
+
+  const handleFollowUserLocation = () => {
+    setFollowUserLocation(!followUserLocation)
+  }
+
+  const PlusIcon = (): JSX.Element => (
+    <Icon name='plus' size={48} color='#DB2777' />
+  )
 
   const NavigationIcon = (): JSX.Element => (
     <Icon
@@ -113,6 +133,9 @@ export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
             }}
           />
         </MapboxGL.ShapeSource>
+        <Pressable onPress={handleAddSpot} style={styles.addSpotButton}>
+          <PlusIcon />
+        </Pressable>
         <Pressable
           onPress={handleFollowUserLocation}
           style={styles.followUserLocationButton}
@@ -131,6 +154,25 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1
+  },
+  addSpotButton: {
+    position: 'absolute',
+    bottom: 50,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: 60,
+    height: 60,
+    borderRadius: 9999,
+    backgroundColor: '#FFFFFF',
+    shadowColor: '#475569',
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4
   },
   followUserLocationButton: {
     position: 'absolute',

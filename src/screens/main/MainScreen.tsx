@@ -8,6 +8,7 @@ import {
   createBottomTabNavigator
 } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Feather'
+import { AddSpotModalScreen } from './Map/AddSpotModalScreen'
 import { MapScreen } from './Map/MapScreen'
 import { SpotsScreen } from './Spots/SpotsScreen'
 import { SpotDetailsModalScreen } from './Map/SpotDetailsModalScreen'
@@ -28,6 +29,7 @@ export type SpotsStackParamList = {
 export type MapStackParamList = {
   Map: undefined
   'Spot Details Modal': any
+  'Add Spot Modal': any
 }
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
@@ -65,6 +67,7 @@ const MapTabStack = () => (
         name='Spot Details Modal'
         component={SpotDetailsModalScreen}
       />
+      <MapStack.Screen name='Add Spot Modal' component={AddSpotModalScreen} />
     </MapStack.Group>
   </MapStack.Navigator>
 )
