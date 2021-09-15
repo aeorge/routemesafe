@@ -9,7 +9,7 @@ import { getStatusColor } from '../../../helpers/getStatusColor'
 import { getStatusText } from '../../../helpers/getStatusText'
 
 type SpotDetailsModalScreenProps = {
-  route: Route<'Spot Details', any>
+  route: Route<'Spot Details Modal', any>
 }
 
 export const SpotDetailsModalScreen = ({
