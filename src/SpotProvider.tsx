@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from 'react'
-import { data } from './data'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import env from './env'
 
 type SpotContext = {
   spots: GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>[]
@@ -20,10 +20,19 @@ const spotContextDefaultValue: SpotContext = {
 export const SpotContext = createContext<SpotContext>(spotContextDefaultValue)
 
 export const SpotProvider = ({ children }: SpotProviderProps): JSX.Element => {
-  const [spots, setSpots] =
-    useState<GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>[]>(
-      data
-    )
+  const [spots, setSpots] = useState<
+    GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>[]
+  >([])
+
+  useEffect(() => {
+    const fetchSpots = async () => {
+      const response = await fetch(`${env.API_URL}/api/spots`)
+      const spots = await response.json()
+      setSpots(spots)
+    }
+
+    fetchSpots()
+  }, [])
 
   const spotContextValue: SpotContext = { spots, setSpots }
 
