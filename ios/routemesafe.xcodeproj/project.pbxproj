@@ -13,9 +13,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1CA548C526ECE69B00A498C8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA548C426ECE69B00A498C8 /* File.swift */; };
 		1CB6430826D7BB7F0038523E /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1CB6430626D7BB7F0038523E /* Feather.ttf */; };
+		5F3B6137D0126F76F1856022 /* libPods-routemesafe-routemesafeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 343929B578BF523F4C0BF23A /* libPods-routemesafe-routemesafeTests.a */; };
+		7F96E2BC8A39D0E85E7174B3 /* libPods-routemesafe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2528869FDDF058333FBD4EB3 /* libPods-routemesafe.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		864D8B5C18533B9661441D3A /* libPods-routemesafe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDA10450CC884F06DA82E06E /* libPods-routemesafe.a */; };
-		B0A0E9FF86AFC91D1153A531 /* libPods-routemesafe-routemesafeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95474DA3E546609BE249E821 /* libPods-routemesafe-routemesafeTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +32,7 @@
 		00E356EE1AD99517003FC87E /* routemesafeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = routemesafeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* routemesafeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = routemesafeTests.m; sourceTree = "<group>"; };
+		1197D848793CAFE094C4BD1A /* Pods-routemesafe-routemesafeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe-routemesafeTests.release.xcconfig"; path = "Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests.release.xcconfig"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* routemesafe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = routemesafe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = routemesafe/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = routemesafe/AppDelegate.m; sourceTree = "<group>"; };
@@ -41,13 +42,12 @@
 		1CA548C326ECE69B00A498C8 /* routemesafe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "routemesafe-Bridging-Header.h"; sourceTree = "<group>"; };
 		1CA548C426ECE69B00A498C8 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		1CB6430626D7BB7F0038523E /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
-		49D1DAF0CC7F7E5E21D4559D /* Pods-routemesafe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe.release.xcconfig"; path = "Target Support Files/Pods-routemesafe/Pods-routemesafe.release.xcconfig"; sourceTree = "<group>"; };
+		24BC10BB999E4CA54D0A1A5B /* Pods-routemesafe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe.debug.xcconfig"; path = "Target Support Files/Pods-routemesafe/Pods-routemesafe.debug.xcconfig"; sourceTree = "<group>"; };
+		2528869FDDF058333FBD4EB3 /* libPods-routemesafe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-routemesafe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		343929B578BF523F4C0BF23A /* libPods-routemesafe-routemesafeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-routemesafe-routemesafeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D1A37B4D0ADF80F4BF1554A /* Pods-routemesafe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe.release.xcconfig"; path = "Target Support Files/Pods-routemesafe/Pods-routemesafe.release.xcconfig"; sourceTree = "<group>"; };
+		66CD35A6872A4B9427CFE112 /* Pods-routemesafe-routemesafeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe-routemesafeTests.debug.xcconfig"; path = "Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = routemesafe/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		95474DA3E546609BE249E821 /* libPods-routemesafe-routemesafeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-routemesafe-routemesafeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C8E1C68FC4C78373E76D14D /* Pods-routemesafe-routemesafeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe-routemesafeTests.release.xcconfig"; path = "Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests.release.xcconfig"; sourceTree = "<group>"; };
-		BDA10450CC884F06DA82E06E /* libPods-routemesafe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-routemesafe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E49DD0DB2C9C9F5754AF4723 /* Pods-routemesafe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe.debug.xcconfig"; path = "Target Support Files/Pods-routemesafe/Pods-routemesafe.debug.xcconfig"; sourceTree = "<group>"; };
-		E61A134A9D6478E85229539A /* Pods-routemesafe-routemesafeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-routemesafe-routemesafeTests.debug.xcconfig"; path = "Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -56,7 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0A0E9FF86AFC91D1153A531 /* libPods-routemesafe-routemesafeTests.a in Frameworks */,
+				5F3B6137D0126F76F1856022 /* libPods-routemesafe-routemesafeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,7 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				864D8B5C18533B9661441D3A /* libPods-routemesafe.a in Frameworks */,
+				7F96E2BC8A39D0E85E7174B3 /* libPods-routemesafe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,10 +91,10 @@
 		012C35A458849F958C92AF93 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E49DD0DB2C9C9F5754AF4723 /* Pods-routemesafe.debug.xcconfig */,
-				49D1DAF0CC7F7E5E21D4559D /* Pods-routemesafe.release.xcconfig */,
-				E61A134A9D6478E85229539A /* Pods-routemesafe-routemesafeTests.debug.xcconfig */,
-				9C8E1C68FC4C78373E76D14D /* Pods-routemesafe-routemesafeTests.release.xcconfig */,
+				24BC10BB999E4CA54D0A1A5B /* Pods-routemesafe.debug.xcconfig */,
+				3D1A37B4D0ADF80F4BF1554A /* Pods-routemesafe.release.xcconfig */,
+				66CD35A6872A4B9427CFE112 /* Pods-routemesafe-routemesafeTests.debug.xcconfig */,
+				1197D848793CAFE094C4BD1A /* Pods-routemesafe-routemesafeTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -125,8 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				BDA10450CC884F06DA82E06E /* libPods-routemesafe.a */,
-				95474DA3E546609BE249E821 /* libPods-routemesafe-routemesafeTests.a */,
+				2528869FDDF058333FBD4EB3 /* libPods-routemesafe.a */,
+				343929B578BF523F4C0BF23A /* libPods-routemesafe-routemesafeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -171,12 +171,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "routemesafeTests" */;
 			buildPhases = (
-				61A730B9952A22A34EF51A41 /* [CP] Check Pods Manifest.lock */,
+				7BBA98446CADA15B72BC65C7 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				753C2069C2D501E276610CE4 /* [CP] Embed Pods Frameworks */,
-				0ED8495EBC759F515B16980E /* [CP] Copy Pods Resources */,
+				12F6B31B92A8FAC0D45FE869 /* [CP] Embed Pods Frameworks */,
+				6678A5567D27993ECABA2179 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,14 +192,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "routemesafe" */;
 			buildPhases = (
-				56F54AD2C4C7CDFB95AA3F92 /* [CP] Check Pods Manifest.lock */,
+				91E528492F10B08DFD87FBF3 /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				14EF129563DFDEF501C7BAF3 /* [CP] Embed Pods Frameworks */,
-				49DF4395E2F4E71E6E656766 /* [CP] Copy Pods Resources */,
+				CC4E7C82AB6DDB71CD7822F8 /* [CP] Embed Pods Frameworks */,
+				BB1871FF3167296E49A1DBF7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -281,7 +281,24 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nexport NODE_BINARY=/Users/georgios.kotziabassis/.nvm/versions/node/v16.0.0/bin/node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		0ED8495EBC759F515B16980E /* [CP] Copy Pods Resources */ = {
+		12F6B31B92A8FAC0D45FE869 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6678A5567D27993ECABA2179 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -298,63 +315,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		14EF129563DFDEF501C7BAF3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		49DF4395E2F4E71E6E656766 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		56F54AD2C4C7CDFB95AA3F92 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-routemesafe-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		61A730B9952A22A34EF51A41 /* [CP] Check Pods Manifest.lock */ = {
+		7BBA98446CADA15B72BC65C7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -376,21 +337,60 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		753C2069C2D501E276610CE4 /* [CP] Embed Pods Frameworks */ = {
+		91E528492F10B08DFD87FBF3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-routemesafe-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe-routemesafeTests/Pods-routemesafe-routemesafeTests-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BB1871FF3167296E49A1DBF7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CC4E7C82AB6DDB71CD7822F8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-routemesafe/Pods-routemesafe-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
@@ -446,7 +446,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E61A134A9D6478E85229539A /* Pods-routemesafe-routemesafeTests.debug.xcconfig */;
+			baseConfigurationReference = 66CD35A6872A4B9427CFE112 /* Pods-routemesafe-routemesafeTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -475,7 +475,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9C8E1C68FC4C78373E76D14D /* Pods-routemesafe-routemesafeTests.release.xcconfig */;
+			baseConfigurationReference = 1197D848793CAFE094C4BD1A /* Pods-routemesafe-routemesafeTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -501,7 +501,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E49DD0DB2C9C9F5754AF4723 /* Pods-routemesafe.debug.xcconfig */;
+			baseConfigurationReference = 24BC10BB999E4CA54D0A1A5B /* Pods-routemesafe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -529,7 +529,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 49D1DAF0CC7F7E5E21D4559D /* Pods-routemesafe.release.xcconfig */;
+			baseConfigurationReference = 3D1A37B4D0ADF80F4BF1554A /* Pods-routemesafe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
