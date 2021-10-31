@@ -75,7 +75,9 @@ export const AddSpotModalScreen = ({
         images: form.images,
         voting: 0,
         status: SpotStatus.PENDING,
-        validated: false
+        validated: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     }
 
