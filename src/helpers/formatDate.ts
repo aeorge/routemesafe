@@ -1,9 +1,14 @@
 const LOCALE = 'de-DE'
 
 export function formatDate(date: string): string {
-  const dateFormat = new Intl.DateTimeFormat(LOCALE, { dateStyle: 'short' })
+  try {
+    const dateFormat = new Intl.DateTimeFormat(LOCALE, { dateStyle: 'short' })
 
-  const formattedDate = dateFormat.format(new Date(date))
+    const formattedDate = dateFormat.format(new Date(date))
 
-  return formattedDate
+    return formattedDate
+  } catch (error) {
+    console.error(error)
+    return '-'
+  }
 }
