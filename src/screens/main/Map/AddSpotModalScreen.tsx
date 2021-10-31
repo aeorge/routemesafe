@@ -126,7 +126,9 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
-                      form.type === 'construction' ? '#E2E8F0' : 'transparent'
+                      form.type === SpotType.COSTRUCTION
+                        ? '#E2E8F0'
+                        : 'transparent'
                   }}
                 >
                   <Image
@@ -140,7 +142,7 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
-                      form.type === 'uneven' ? '#E2E8F0' : 'transparent'
+                      form.type === SpotType.UNEVEN ? '#E2E8F0' : 'transparent'
                   }}
                 >
                   <Image
@@ -154,7 +156,7 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
-                      form.type === 'narrow' ? '#E2E8F0' : 'transparent'
+                      form.type === SpotType.NARROW ? '#E2E8F0' : 'transparent'
                   }}
                 >
                   <Image
@@ -168,7 +170,7 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
-                      form.type === 'danger' ? '#E2E8F0' : 'transparent'
+                      form.type === SpotType.DANGER ? '#E2E8F0' : 'transparent'
                   }}
                 >
                   <Image
@@ -191,10 +193,14 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
-                      form.severity === 1 ? getSeverityColor(1) : '#E2E8F0'
+                      form.severity === SpotSeverity.LOW
+                        ? getSeverityColor(SpotSeverity.LOW)
+                        : '#E2E8F0'
                   }}
                 >
-                  <Text style={styles.severityButtonText}>1</Text>
+                  <Text style={styles.severityButtonText}>
+                    {SpotSeverity.LOW}
+                  </Text>
                 </Pressable>
                 <Pressable
                   onPress={() =>
@@ -203,10 +209,14 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
-                      form.severity === 2 ? getSeverityColor(2) : '#E2E8F0'
+                      form.severity === SpotSeverity.MEDIUM
+                        ? getSeverityColor(SpotSeverity.MEDIUM)
+                        : '#E2E8F0'
                   }}
                 >
-                  <Text style={styles.severityButtonText}>2</Text>
+                  <Text style={styles.severityButtonText}>
+                    {SpotSeverity.MEDIUM}
+                  </Text>
                 </Pressable>
                 <Pressable
                   onPress={() =>
@@ -215,10 +225,14 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
-                      form.severity === 3 ? getSeverityColor(3) : '#E2E8F0'
+                      form.severity === SpotSeverity.HIGH
+                        ? getSeverityColor(SpotSeverity.HIGH)
+                        : '#E2E8F0'
                   }}
                 >
-                  <Text style={styles.severityButtonText}>3</Text>
+                  <Text style={styles.severityButtonText}>
+                    {SpotSeverity.HIGH}
+                  </Text>
                 </Pressable>
                 <Pressable
                   onPress={() =>
@@ -227,10 +241,14 @@ export const AddSpotModalScreen = ({
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
-                      form.severity === 4 ? getSeverityColor(4) : '#E2E8F0'
+                      form.severity === SpotSeverity.VERY_HIGH
+                        ? getSeverityColor(SpotSeverity.VERY_HIGH)
+                        : '#E2E8F0'
                   }}
                 >
-                  <Text style={styles.severityButtonText}>4</Text>
+                  <Text style={styles.severityButtonText}>
+                    {SpotSeverity.VERY_HIGH}
+                  </Text>
                 </Pressable>
               </View>
             </View>
