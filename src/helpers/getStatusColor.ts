@@ -1,9 +1,9 @@
 import { SpotStatus } from '../types'
 
 export const getStatusColor = (status: SpotStatus): string => {
-  return status === 'active'
+  return status === SpotStatus.ACTIVE
     ? '#BBF7D0'
-    : status === 'inactive'
+    : status === SpotStatus.INACTIVE
       ? '#FECACA'
       : '#FEF08A'
 }

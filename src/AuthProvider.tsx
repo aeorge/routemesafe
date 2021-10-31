@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  createContext,
-  ReactNode
-} from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -23,7 +17,7 @@ type AuthContext = {
 }
 
 type AuthProviderProps = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 const authContextDefaultValue: AuthContext = {

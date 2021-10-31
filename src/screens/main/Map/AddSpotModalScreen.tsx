@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {
+  Alert,
   Image,
   Keyboard,
   KeyboardAvoidingView,
@@ -11,25 +12,37 @@ import {
   View
 } from 'react-native'
 import { Route } from '@react-navigation/routers'
+import { StackNavigationProp } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Feather'
+import env from '../../../env'
+import { SpotSeverity, SpotStatus, SpotType } from '../../../types'
+import { MapStackParamList } from '../MainScreen'
+import { useSpots } from '../../../SpotProvider'
 import { Spacer } from '../../../components/Spacer'
 import { getSeverityColor } from '../../../helpers/getSeverityColor'
 
+type AddSpotModalScreenNavigationProp = StackNavigationProp<
+  MapStackParamList,
+  'Add Spot Modal'
+>
+
 type AddSpotModalScreenProps = {
-  route: Route<'Add Spot Modal', any>
+  route: Route<'Add Spot Modal', { coordinates: GeoJSON.Position }>
+  navigation: AddSpotModalScreenNavigationProp
 }
 
 type AddSpotForm = {
-  type?: string
-  severity?: 1 | 2 | 3 | 4
+  type?: SpotType
+  severity?: SpotSeverity
   comment?: string
   images: string[]
 }
 
 export const AddSpotModalScreen = ({
-  route
+  route,
+  navigation
 }: AddSpotModalScreenProps): JSX.Element => {
-  const coordinates = route.params
+  const { coordinates } = route.params
 
   const [form, setForm] = useState<AddSpotForm>({
     type: undefined,
@@ -37,6 +50,53 @@ export const AddSpotModalScreen = ({
     comment: undefined,
     images: []
   })
+
+  const { spots, setSpots } = useSpots()
+
+  const handleAddSpot = async () => {
+    if (!form.type) {
+      return Alert.alert('Please select the type of this spot.')
+    }
+
+    if (!form.severity) {
+      return Alert.alert('Please select the severity of this spot.')
+    }
+
+    const spot: GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties> = {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates
+      },
+      properties: {
+        type: form.type,
+        severity: form.severity,
+        comment: form.comment,
+        images: form.images,
+        voting: 0,
+        status: SpotStatus.PENDING,
+        validated: false
+      }
+    }
+
+    try {
+      const response = await fetch(`${env.API_URL}/api/spots`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(spot)
+      })
+
+      const newSpot = await response.json()
+
+      setSpots([...spots, newSpot])
+      setTimeout(() => navigation.navigate('Map'), 300)
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const handleKeyboardDismiss = () => Keyboard.dismiss()
 
@@ -60,7 +120,9 @@ export const AddSpotModalScreen = ({
               <Spacer height={8} />
               <View style={styles.typesContainer}>
                 <Pressable
-                  onPress={() => setForm({ ...form, type: 'construction' })}
+                  onPress={() =>
+                    setForm({ ...form, type: SpotType.COSTRUCTION })
+                  }
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
@@ -74,7 +136,7 @@ export const AddSpotModalScreen = ({
                   <Text style={styles.typeLabel}>Construction</Text>
                 </Pressable>
                 <Pressable
-                  onPress={() => setForm({ ...form, type: 'uneven' })}
+                  onPress={() => setForm({ ...form, type: SpotType.UNEVEN })}
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
@@ -88,7 +150,7 @@ export const AddSpotModalScreen = ({
                   <Text style={styles.typeLabel}>Uneven</Text>
                 </Pressable>
                 <Pressable
-                  onPress={() => setForm({ ...form, type: 'narrow' })}
+                  onPress={() => setForm({ ...form, type: SpotType.NARROW })}
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
@@ -102,7 +164,7 @@ export const AddSpotModalScreen = ({
                   <Text style={styles.typeLabel}>Narrow</Text>
                 </Pressable>
                 <Pressable
-                  onPress={() => setForm({ ...form, type: 'danger' })}
+                  onPress={() => setForm({ ...form, type: SpotType.DANGER })}
                   style={{
                     ...styles.typeIconButton,
                     backgroundColor:
@@ -123,7 +185,9 @@ export const AddSpotModalScreen = ({
               <Spacer height={8} />
               <View style={styles.severitiesContainer}>
                 <Pressable
-                  onPress={() => setForm({ ...form, severity: 1 })}
+                  onPress={() =>
+                    setForm({ ...form, severity: SpotSeverity.LOW })
+                  }
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
@@ -133,7 +197,9 @@ export const AddSpotModalScreen = ({
                   <Text style={styles.severityButtonText}>1</Text>
                 </Pressable>
                 <Pressable
-                  onPress={() => setForm({ ...form, severity: 2 })}
+                  onPress={() =>
+                    setForm({ ...form, severity: SpotSeverity.MEDIUM })
+                  }
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
@@ -143,7 +209,9 @@ export const AddSpotModalScreen = ({
                   <Text style={styles.severityButtonText}>2</Text>
                 </Pressable>
                 <Pressable
-                  onPress={() => setForm({ ...form, severity: 3 })}
+                  onPress={() =>
+                    setForm({ ...form, severity: SpotSeverity.HIGH })
+                  }
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
@@ -153,7 +221,9 @@ export const AddSpotModalScreen = ({
                   <Text style={styles.severityButtonText}>3</Text>
                 </Pressable>
                 <Pressable
-                  onPress={() => setForm({ ...form, severity: 4 })}
+                  onPress={() =>
+                    setForm({ ...form, severity: SpotSeverity.VERY_HIGH })
+                  }
                   style={{
                     ...styles.severityButton,
                     backgroundColor:
@@ -206,7 +276,7 @@ export const AddSpotModalScreen = ({
             </View>
             <Spacer height={32} />
             <View>
-              <Pressable style={styles.addSpotButton}>
+              <Pressable onPress={handleAddSpot} style={styles.addSpotButton}>
                 <Text style={styles.addSpotButtonText}>Add Spot</Text>
               </Pressable>
             </View>

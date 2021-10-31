@@ -9,7 +9,9 @@ import MapboxGL, {
 } from '@react-native-mapbox-gl/maps'
 import Geolocation from 'react-native-geolocation-service'
 import Icon from 'react-native-vector-icons/Feather'
+import env from '../../../env'
 import { MapStackParamList } from '../MainScreen'
+import { useSpots } from '../../../SpotProvider'
 
 type MapScreenNavigationProp = StackNavigationProp<MapStackParamList, 'Map'>
 
@@ -17,7 +19,7 @@ type MapScreenProps = {
   navigation: MapScreenNavigationProp
 }
 
-MapboxGL.setAccessToken('')
+MapboxGL.setAccessToken(env.MAPBOX_ACCESS_TOKEN)
 
 const defaultSettings: CameraSettings = {
   centerCoordinate: [9.1829, 48.7758],
@@ -31,6 +33,8 @@ const mapSettings: CameraProps = {
 
 export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
   const [followUserLocation, setFollowUserLocation] = useState<boolean>(true)
+
+  const { spots } = useSpots()
 
   const handleRegionWillChange = (
     feature: GeoJSON.Feature<GeoJSON.Point, RegionPayload>
@@ -48,15 +52,14 @@ export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
   const handleAddSpot = () => {
     Geolocation.getCurrentPosition(
       (position) => {
-        navigation.navigate('Add Spot Modal', [
-          position.coords.longitude,
-          position.coords.latitude
-        ])
+        navigation.navigate('Add Spot Modal', {
+          coordinates: [position.coords.longitude, position.coords.latitude]
+        })
       },
       (error) => {
         console.error(error)
       },
-      { enableHighAccuracy: true }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
     )
   }
 
@@ -93,7 +96,7 @@ export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
         <MapboxGL.UserLocation renderMode='native' />
         <MapboxGL.ShapeSource
           id='spots'
-          shape={{ type: 'FeatureCollection', features: [] }}
+          shape={{ type: 'FeatureCollection', features: spots }}
           onPress={(event) => handleSpotDetails(event)}
         >
           <MapboxGL.SymbolLayer

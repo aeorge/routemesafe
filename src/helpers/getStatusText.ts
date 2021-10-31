@@ -1,9 +1,9 @@
 import { SpotStatus } from '../types'
 
 export const getStatusText = (status: SpotStatus): string => {
-  return status === 'active'
+  return status === SpotStatus.ACTIVE
     ? 'Active'
-    : status === 'inactive'
+    : status === SpotStatus.INACTIVE
       ? 'Inactive'
       : 'Pending'
 }

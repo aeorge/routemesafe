@@ -1,6 +1,6 @@
-import { Severity } from '../types'
+import { SpotSeverity } from '../types'
 
-export const getSeverityColor = (severity: Severity): string => {
+export const getSeverityColor = (severity: SpotSeverity): string => {
   return severity === 1
     ? '#FACC15'
     : severity === 2

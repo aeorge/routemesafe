@@ -1,3 +1,19 @@
-export type Severity = 1 | 2 | 3 | 4
+export enum SpotStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  PENDING = 'pending'
+}
 
-export type SpotStatus = 'active' | 'inactive' | 'pending'
+export enum SpotType {
+  COSTRUCTION = 'construction',
+  UNEVEN = 'uneven',
+  NARROW = 'narrow',
+  DANGER = 'danger'
+}
+
+export enum SpotSeverity {
+  LOW = 1,
+  MEDIUM = 2,
+  HIGH = 3,
+  VERY_HIGH = 4
+}
