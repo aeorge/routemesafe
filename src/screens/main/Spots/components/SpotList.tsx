@@ -16,7 +16,6 @@ import { Spacer } from '../../../../components/Spacer'
 import { formatDate } from '../../../../helpers/formatDate'
 import { getSeverityColor } from '../../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../../helpers/getStatusColor'
-import { getStatusText } from '../../../../helpers/getStatusText'
 
 type SpotListProps = {
   spots: any[]
@@ -120,9 +119,7 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
                   backgroundColor: getStatusColor(spot.properties.status)
                 }}
               >
-                <Text style={styles.metaTagText}>
-                  {getStatusText(spot.properties.status)}
-                </Text>
+                <Text style={styles.metaTagText}>{spot.properties.status}</Text>
               </View>
             </View>
           </View>
@@ -166,7 +163,8 @@ const styles = StyleSheet.create({
   },
   typeText: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
   },
   commentContainer: {
     display: 'flex',
@@ -195,7 +193,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#E2E8F0'
   },
   metaTagText: {
-    color: '#1E293B'
+    color: '#1E293B',
+    textTransform: 'capitalize'
   },
   spotActionContainer: {
     display: 'flex',

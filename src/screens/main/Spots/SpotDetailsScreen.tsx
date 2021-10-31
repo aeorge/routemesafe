@@ -18,7 +18,6 @@ import { Spacer } from '../../../components/Spacer'
 import { formatDateTime } from '../../../helpers/formatDateTime'
 import { getSeverityColor } from '../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../helpers/getStatusColor'
-import { getStatusText } from '../../../helpers/getStatusText'
 
 type SpotDetailsScreenNavigationProp = StackNavigationProp<
   SpotsStackParamList,
@@ -104,7 +103,7 @@ export const SpotDetailsScreen = ({
                 }}
               >
                 <Text style={styles.metaTagText}>
-                  {getStatusText(spot?.properties.status)}
+                  {spot?.properties.status}
                 </Text>
               </View>
             </View>
@@ -236,7 +235,8 @@ const styles = StyleSheet.create({
   },
   spotType: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    textTransform: 'capitalize'
   },
   meta: {
     display: 'flex',
@@ -258,7 +258,8 @@ const styles = StyleSheet.create({
   },
   metaTagText: {
     fontSize: 16,
-    color: '#1E293B'
+    color: '#1E293B',
+    textTransform: 'capitalize'
   },
   mapContainer: {
     borderWidth: 4,
