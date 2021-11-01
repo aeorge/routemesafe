@@ -1,11 +1,10 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import env from './env'
+import { Spot } from './types'
 
 type SpotContext = {
-  spots: GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>[]
-  setSpots: React.Dispatch<
-    GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>[]
-  >
+  spots: Spot[]
+  setSpots: React.Dispatch<Spot[]>
 }
 
 type SpotProviderProps = {
@@ -20,9 +19,7 @@ const spotContextDefaultValue: SpotContext = {
 export const SpotContext = createContext<SpotContext>(spotContextDefaultValue)
 
 export const SpotProvider = ({ children }: SpotProviderProps): JSX.Element => {
-  const [spots, setSpots] = useState<
-    GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties>[]
-  >([])
+  const [spots, setSpots] = useState<Spot[]>([])
 
   useEffect(() => {
     const fetchSpots = async () => {

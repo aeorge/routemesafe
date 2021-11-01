@@ -1,34 +1,118 @@
-import React from 'react'
-import { FlatList, Image, StyleSheet, Text, View } from 'react-native'
+import React, { useCallback, useState } from 'react'
+import {
+  FlatList,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View
+} from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 import { Route } from '@react-navigation/routers'
 import Icon from 'react-native-vector-icons/Feather'
+import env from '../../../env'
+import { Spot } from '../../../types'
 import { Spacer } from '../../../components/Spacer'
 import { formatDateTime } from '../../../helpers/formatDateTime'
 import { getSeverityColor } from '../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../helpers/getStatusColor'
 
 type SpotDetailsModalScreenProps = {
-  route: Route<'Spot Details Modal', any>
+  route: Route<'Spot Details Modal', { id: string }>
 }
 
 export const SpotDetailsModalScreen = ({
   route
 }: SpotDetailsModalScreenProps): JSX.Element => {
-  const spot = route.params
+  const { id } = route.params
+
+  const [spot, setSpot] = useState<Spot>()
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchSpot = async () => {
+        try {
+          const response = await fetch(`${env.API_URL}/api/spots/${id}`)
+          const spot = await response.json()
+          setSpot(spot)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      fetchSpot()
+    }, [id])
+  )
+
+  const handleVote = async ({
+    type,
+    spot
+  }: {
+    type: 'up' | 'down'
+    spot: Spot
+  }) => {
+    const voting =
+      type === 'up' ? spot.properties.voting + 1 : spot.properties.voting - 1
+
+    try {
+      await fetch(`${env.API_URL}/api/spots/${id}`, {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ voting })
+      })
+
+      setSpot({
+        ...spot,
+        properties: {
+          ...spot.properties,
+          voting
+        }
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const SeverityIcon = (): JSX.Element => (
     <Icon name='chevrons-up' size={16} color='#475569' />
   )
 
-  const VotingIcon = (): JSX.Element => (
+  const UpvoteIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={16} color='#475569' />
   )
+
+  const DownvoteIcon = (): JSX.Element => (
+    <Icon name='arrow-down' size={16} color='#475569' />
+  )
+
+  // TODO Render skeleton
+  if (!spot) return <View />
 
   return (
     <View style={styles.container}>
       <View style={styles.inner}>
         <Spacer height={32} />
-        <Text style={styles.heading}>Spot Details</Text>
+        <View style={styles.headingContainer}>
+          <Text style={styles.headingText}>Spot Details</Text>
+          <View style={styles.headingVotingButtonContainer}>
+            <Pressable
+              onPress={() => handleVote({ type: 'up', spot })}
+              style={styles.headingVotingButton}
+            >
+              <UpvoteIcon />
+            </Pressable>
+            <Spacer width={8} />
+            <Pressable
+              onPress={() => handleVote({ type: 'down', spot })}
+              style={styles.headingVotingButton}
+            >
+              <DownvoteIcon />
+            </Pressable>
+          </View>
+        </View>
         <Spacer height={16} />
         <View style={styles.detailsHeadingContainer}>
           <View style={styles.detailsHeading}>
@@ -37,7 +121,7 @@ export const SpotDetailsModalScreen = ({
               style={styles.typeIcon}
             />
             <Spacer width={12} />
-            <Text style={styles.spotType}>{spot?.properties.type}</Text>
+            <Text style={styles.spotType}>{spot.properties.type}</Text>
           </View>
           <View style={styles.meta}>
             <View style={styles.metaTagContainer}>
@@ -46,32 +130,30 @@ export const SpotDetailsModalScreen = ({
               <View
                 style={{
                   ...styles.metaTag,
-                  backgroundColor: getSeverityColor(spot?.properties.severity)
+                  backgroundColor: getSeverityColor(spot.properties.severity)
                 }}
               >
                 <Text style={styles.metaTagText}>
-                  {spot?.properties.severity}
+                  {spot.properties.severity}
                 </Text>
               </View>
             </View>
             <Spacer width={8} />
             <View style={styles.metaTagContainer}>
-              <VotingIcon />
+              <UpvoteIcon />
               <Spacer width={2} />
               <View style={styles.metaTag}>
-                <Text style={styles.metaTagText}>
-                  {spot?.properties.voting}
-                </Text>
+                <Text style={styles.metaTagText}>{spot.properties.voting}</Text>
               </View>
             </View>
             <Spacer width={8} />
             <View
               style={{
                 ...styles.metaTag,
-                backgroundColor: getStatusColor(spot?.properties.status)
+                backgroundColor: getStatusColor(spot.properties.status)
               }}
             >
-              <Text style={styles.metaTagText}>{spot?.properties.status}</Text>
+              <Text style={styles.metaTagText}>{spot.properties.status}</Text>
             </View>
           </View>
         </View>
@@ -84,7 +166,7 @@ export const SpotDetailsModalScreen = ({
             ListEmptyComponent={() => (
               <Text style={styles.detailsText}>No images yet</Text>
             )}
-            data={spot?.properties.images}
+            data={spot.properties.images}
             horizontal
             renderItem={({ index, item: image }) => (
               <View key={index}>
@@ -97,7 +179,7 @@ export const SpotDetailsModalScreen = ({
         <View>
           <Text style={styles.detailsLabel}>Comment</Text>
           <Spacer height={8} />
-          <Text style={styles.detailsText}>{spot?.properties.comment}</Text>
+          <Text style={styles.detailsText}>{spot.properties.comment}</Text>
         </View>
         <Spacer height={16} />
         <View style={styles.detailsHorizontalContainer}>
@@ -105,14 +187,14 @@ export const SpotDetailsModalScreen = ({
             <Text style={styles.detailsLabel}>Created At</Text>
             <Spacer height={8} />
             <Text style={styles.detailsText}>
-              {formatDateTime(spot?.properties.createdAt)}
+              {formatDateTime(spot.properties.createdAt)}
             </Text>
           </View>
           <View style={styles.detailsHorizontalInner}>
             <Text style={styles.detailsLabel}>Updated At</Text>
             <Spacer height={8} />
             <Text style={styles.detailsText}>
-              {formatDateTime(spot?.properties.updatedAt)}
+              {formatDateTime(spot.properties.updatedAt)}
             </Text>
           </View>
         </View>
@@ -122,14 +204,14 @@ export const SpotDetailsModalScreen = ({
             <Text style={styles.detailsLabel}>Latitude</Text>
             <Spacer height={8} />
             <Text style={styles.detailsText}>
-              {spot?.geometry.coordinates[1]}
+              {spot.geometry.coordinates[1]}
             </Text>
           </View>
           <View style={styles.detailsHorizontalInner}>
             <Text style={styles.detailsLabel}>Longitude</Text>
             <Spacer height={8} />
             <Text style={styles.detailsText}>
-              {spot?.geometry.coordinates[0]}
+              {spot.geometry.coordinates[0]}
             </Text>
           </View>
         </View>
@@ -148,9 +230,23 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '90%'
   },
-  heading: {
+  headingContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  headingText: {
     fontSize: 28,
     fontWeight: 'bold'
+  },
+  headingVotingButtonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  headingVotingButton: {
+    padding: 8,
+    borderRadius: 4,
+    backgroundColor: '#E2E8F0'
   },
   detailsHeadingContainer: {
     display: 'flex',

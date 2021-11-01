@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   FlatList,
   Image,
@@ -8,11 +8,14 @@ import {
   Text,
   View
 } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 import { Route } from '@react-navigation/routers'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import MapboxGL from '@react-native-mapbox-gl/maps'
 import Icon from 'react-native-vector-icons/Feather'
+import env from '../../../env'
+import { Spot } from '../../../types'
 import { SpotsStackParamList } from '../MainScreen'
 import { Spacer } from '../../../components/Spacer'
 import { formatDateTime } from '../../../helpers/formatDateTime'
@@ -25,7 +28,7 @@ type SpotDetailsScreenNavigationProp = StackNavigationProp<
 >
 
 type SpotDetailsScreenProps = {
-  route: Route<'Spot Details', any>
+  route: Route<'Spot Details', { id: string }>
   navigation: SpotDetailsScreenNavigationProp
 }
 
@@ -33,7 +36,25 @@ export const SpotDetailsScreen = ({
   route,
   navigation
 }: SpotDetailsScreenProps): JSX.Element => {
-  const spot = route.params
+  const { id } = route.params
+
+  const [spot, setSpot] = useState<Spot>()
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchSpot = async () => {
+        try {
+          const response = await fetch(`${env.API_URL}/api/spots/${id}`)
+          const spot = await response.json()
+          setSpot(spot)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      fetchSpot()
+    }, [id])
+  )
 
   const handleBack = () => navigation.goBack()
 
@@ -46,6 +67,9 @@ export const SpotDetailsScreen = ({
   const VotingIcon = (): JSX.Element => (
     <Icon name='arrow-up' size={16} color='#475569' />
   )
+
+  // TODO Render skeleton
+  if (!spot) return <View />
 
   return (
     <SafeAreaView style={styles.container}>
@@ -68,7 +92,7 @@ export const SpotDetailsScreen = ({
                 style={styles.typeIcon}
               />
               <Spacer width={12} />
-              <Text style={styles.spotType}>{spot?.properties.type}</Text>
+              <Text style={styles.spotType}>{spot.properties.type}</Text>
             </View>
             <View style={styles.meta}>
               <View style={styles.metaTagContainer}>
@@ -77,11 +101,11 @@ export const SpotDetailsScreen = ({
                 <View
                   style={{
                     ...styles.metaTag,
-                    backgroundColor: getSeverityColor(spot?.properties.severity)
+                    backgroundColor: getSeverityColor(spot.properties.severity)
                   }}
                 >
                   <Text style={styles.metaTagText}>
-                    {spot?.properties.severity}
+                    {spot.properties.severity}
                   </Text>
                 </View>
               </View>
@@ -91,7 +115,7 @@ export const SpotDetailsScreen = ({
                 <Spacer width={2} />
                 <View style={styles.metaTag}>
                   <Text style={styles.metaTagText}>
-                    {spot?.properties.voting}
+                    {spot.properties.voting}
                   </Text>
                 </View>
               </View>
@@ -99,12 +123,10 @@ export const SpotDetailsScreen = ({
               <View
                 style={{
                   ...styles.metaTag,
-                  backgroundColor: getStatusColor(spot?.properties.status)
+                  backgroundColor: getStatusColor(spot.properties.status)
                 }}
               >
-                <Text style={styles.metaTagText}>
-                  {spot?.properties.status}
-                </Text>
+                <Text style={styles.metaTagText}>{spot.properties.status}</Text>
               </View>
             </View>
           </View>
@@ -117,17 +139,17 @@ export const SpotDetailsScreen = ({
               <MapboxGL.Camera
                 defaultSettings={{
                   centerCoordinate: [
-                    spot?.geometry.coordinates[0],
-                    spot?.geometry.coordinates[1]
+                    spot.geometry.coordinates[0],
+                    spot.geometry.coordinates[1]
                   ],
                   zoomLevel: 16
                 }}
               />
               <MapboxGL.MarkerView
-                id={spot?._id}
+                id={id}
                 coordinate={[
-                  spot?.geometry.coordinates[0],
-                  spot?.geometry.coordinates[1]
+                  spot.geometry.coordinates[0],
+                  spot.geometry.coordinates[1]
                 ]}
               />
             </MapboxGL.MapView>
@@ -141,7 +163,7 @@ export const SpotDetailsScreen = ({
               ListEmptyComponent={() => (
                 <Text style={styles.detailsText}>No images yet</Text>
               )}
-              data={spot?.properties.images}
+              data={spot.properties.images}
               horizontal
               renderItem={({ index, item: image }) => (
                 <View key={index}>
@@ -154,7 +176,7 @@ export const SpotDetailsScreen = ({
           <View>
             <Text style={styles.detailsLabel}>Comment</Text>
             <Spacer height={8} />
-            <Text style={styles.detailsText}>{spot?.properties.comment}</Text>
+            <Text style={styles.detailsText}>{spot.properties.comment}</Text>
           </View>
           <Spacer height={16} />
           <View style={styles.detailsHorizontalContainer}>
@@ -162,14 +184,14 @@ export const SpotDetailsScreen = ({
               <Text style={styles.detailsLabel}>Created At</Text>
               <Spacer height={8} />
               <Text style={styles.detailsText}>
-                {formatDateTime(spot?.properties.createdAt)}
+                {formatDateTime(spot.properties.createdAt)}
               </Text>
             </View>
             <View style={styles.detailsHorizontalInner}>
               <Text style={styles.detailsLabel}>Updated At</Text>
               <Spacer height={8} />
               <Text style={styles.detailsText}>
-                {formatDateTime(spot?.properties.updatedAt)}
+                {formatDateTime(spot.properties.updatedAt)}
               </Text>
             </View>
           </View>
@@ -179,14 +201,14 @@ export const SpotDetailsScreen = ({
               <Text style={styles.detailsLabel}>Latitude</Text>
               <Spacer height={8} />
               <Text style={styles.detailsText}>
-                {spot?.geometry.coordinates[1]}
+                {spot.geometry.coordinates[1]}
               </Text>
             </View>
             <View style={styles.detailsHorizontalInner}>
               <Text style={styles.detailsLabel}>Longitude</Text>
               <Spacer height={8} />
               <Text style={styles.detailsText}>
-                {spot?.geometry.coordinates[0]}
+                {spot.geometry.coordinates[0]}
               </Text>
             </View>
           </View>

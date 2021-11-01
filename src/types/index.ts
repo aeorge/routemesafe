@@ -1,7 +1,15 @@
-export enum SpotStatus {
-  ACTIVE = 'active',
-  INACTIVE = 'inactive',
-  PENDING = 'pending'
+export type Spot = GeoJSON.Feature<GeoJSON.Point, SpotProperties>
+
+type SpotProperties = {
+  type: SpotType
+  severity: SpotSeverity
+  comment?: string
+  images: string[]
+  voting: number
+  status: SpotStatus
+  validated: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export enum SpotType {
@@ -16,4 +24,10 @@ export enum SpotSeverity {
   MEDIUM = 2,
   HIGH = 3,
   VERY_HIGH = 4
+}
+
+export enum SpotStatus {
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  PENDING = 'pending'
 }

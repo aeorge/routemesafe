@@ -10,6 +10,7 @@ import {
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Feather'
+import { Spot } from '../../../../types'
 import { SpotsStackParamList } from '../../MainScreen'
 import { SpotListHeader } from './SpotListHeader'
 import { Spacer } from '../../../../components/Spacer'
@@ -18,7 +19,7 @@ import { getSeverityColor } from '../../../../helpers/getSeverityColor'
 import { getStatusColor } from '../../../../helpers/getStatusColor'
 
 type SpotListProps = {
-  spots: any[]
+  spots: Spot[]
 }
 
 type SpotListScreenNavigationProp = StackNavigationProp<
@@ -126,7 +127,9 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
           <Spacer width={12} />
           <View style={styles.spotActionContainer}>
             <Pressable
-              onPress={() => navigation.navigate('Spot Details', spot)}
+              onPress={() =>
+                navigation.navigate('Spot Details', { id: spot.id })
+              }
             >
               <EllipsisIcon />
             </Pressable>

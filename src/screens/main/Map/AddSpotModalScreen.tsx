@@ -15,7 +15,7 @@ import { Route } from '@react-navigation/routers'
 import { StackNavigationProp } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Feather'
 import env from '../../../env'
-import { SpotSeverity, SpotStatus, SpotType } from '../../../types'
+import { Spot, SpotSeverity, SpotStatus, SpotType } from '../../../types'
 import { MapStackParamList } from '../MainScreen'
 import { useSpots } from '../../../SpotProvider'
 import { Spacer } from '../../../components/Spacer'
@@ -62,7 +62,7 @@ export const AddSpotModalScreen = ({
       return Alert.alert('Please select the severity of this spot.')
     }
 
-    const spot: GeoJSON.Feature<GeoJSON.Geometry, GeoJSON.GeoJsonProperties> = {
+    const spot: Spot = {
       type: 'Feature',
       geometry: {
         type: 'Point',

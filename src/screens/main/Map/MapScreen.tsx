@@ -45,8 +45,8 @@ export const MapScreen = ({ navigation }: MapScreenProps): JSX.Element => {
   }
 
   const handleSpotDetails = (event: OnPressEvent) => {
-    const spot = event.features[0]
-    navigation.navigate('Spot Details Modal', spot)
+    const { id } = event.features[0]
+    navigation.navigate('Spot Details Modal', { id })
   }
 
   const handleAddSpot = () => {

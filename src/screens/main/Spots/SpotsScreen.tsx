@@ -1,12 +1,33 @@
-import React from 'react'
+import React, { useCallback, useState } from 'react'
 import { StatusBar, StyleSheet, Text, View } from 'react-native'
+import { useFocusEffect } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { useSpots } from '../../../SpotProvider'
+import env from '../../../env'
+import { Spot } from '../../../types'
 import { SpotList } from './components/SpotList'
 import { Spacer } from '../../../components/Spacer'
 
 export const SpotsScreen = (): JSX.Element => {
-  const { spots } = useSpots()
+  const [spots, setSpots] = useState<Spot[]>([])
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchSpots = async () => {
+        try {
+          const response = await fetch(`${env.API_URL}/api/spots`)
+          const spots = await response.json()
+          setSpots(spots)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      fetchSpots()
+    }, [])
+  )
+
+  // TODO Render skeleton
+  if (!spots) return <View />
 
   return (
     <SafeAreaView style={styles.container}>
