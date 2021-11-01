@@ -75,7 +75,9 @@ export const SpotList = ({ spots }: SpotListProps): JSX.Element => {
             <View style={styles.commentContainer}>
               <CommentIcon />
               <Spacer width={2} />
-              <Text style={styles.comment}>{spot.properties.comment}</Text>
+              <Text style={styles.comment}>
+                {spot.properties.comment || '-'}
+              </Text>
             </View>
             <Spacer height={12} />
             <View style={styles.meta}>

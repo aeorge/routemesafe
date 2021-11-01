@@ -176,7 +176,9 @@ export const SpotDetailsScreen = ({
           <View>
             <Text style={styles.detailsLabel}>Comment</Text>
             <Spacer height={8} />
-            <Text style={styles.detailsText}>{spot.properties.comment}</Text>
+            <Text style={styles.detailsText}>
+              {spot.properties.comment || '-'}
+            </Text>
           </View>
           <Spacer height={16} />
           <View style={styles.detailsHorizontalContainer}>
