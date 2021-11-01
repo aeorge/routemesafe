@@ -9,6 +9,8 @@ import { SplashScreen } from '../screens/SplashScreen'
 import { SignInScreen } from '../screens/auth/SignInScreen'
 import { SignUpScreen } from '../screens/auth/SignUpScreen'
 import { MainScreen } from '../screens/main/MainScreen'
+import { AddSpotModalScreen } from '../screens/main/Map/AddSpotModalScreen'
+import { SpotDetailsModalScreen } from '../screens/main/Map/SpotDetailsModalScreen'
 
 export type AuthStackParamList = {
   SignIn: undefined
@@ -17,6 +19,8 @@ export type AuthStackParamList = {
 
 export type MainStackParamList = {
   Main: undefined
+  'Add Spot Modal': any
+  'Spot Details Modal': any
 }
 
 const RootStack = createStackNavigator()
@@ -43,6 +47,16 @@ export const Container = (): JSX.Element => {
         ) : (
           <RootStack.Group>
             <MainStack.Screen name='Main' component={MainScreen} />
+            <MainStack.Group screenOptions={{ presentation: 'modal' }}>
+              <MainStack.Screen
+                name='Add Spot Modal'
+                component={AddSpotModalScreen}
+              />
+              <MainStack.Screen
+                name='Spot Details Modal'
+                component={SpotDetailsModalScreen}
+              />
+            </MainStack.Group>
           </RootStack.Group>
         )}
       </RootStack.Navigator>

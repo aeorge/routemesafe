@@ -8,10 +8,8 @@ import {
   createBottomTabNavigator
 } from '@react-navigation/bottom-tabs'
 import Icon from 'react-native-vector-icons/Feather'
-import { AddSpotModalScreen } from './Map/AddSpotModalScreen'
 import { MapScreen } from './Map/MapScreen'
 import { SpotsScreen } from './Spots/SpotsScreen'
-import { SpotDetailsModalScreen } from './Map/SpotDetailsModalScreen'
 import { SpotDetailsScreen } from './Spots/SpotDetailsScreen'
 import { SettingsScreen } from './SettingsScreen'
 
@@ -28,8 +26,6 @@ export type SpotsStackParamList = {
 
 export type MapStackParamList = {
   Map: undefined
-  'Spot Details Modal': any
-  'Add Spot Modal': any
 }
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
@@ -59,47 +55,40 @@ const SpotsTabStack = () => (
 
 const MapTabStack = () => (
   <MapStack.Navigator screenOptions={stackOptions}>
-    <MapStack.Group>
-      <MapStack.Screen name='Map' component={MapScreen} />
-    </MapStack.Group>
-    <MapStack.Group screenOptions={{ presentation: 'modal' }}>
-      <MapStack.Screen
-        name='Spot Details Modal'
-        component={SpotDetailsModalScreen}
-      />
-      <MapStack.Screen name='Add Spot Modal' component={AddSpotModalScreen} />
-    </MapStack.Group>
+    <MapStack.Screen name='Map' component={MapScreen} />
   </MapStack.Navigator>
 )
 
 export const MainScreen = (): JSX.Element => (
-  <BottomTab.Navigator
-    initialRouteName='Map Tab'
-    screenOptions={bottomTabOptions}
-  >
-    <BottomTab.Screen
-      name='Spots Tab'
-      component={SpotsTabStack}
-      options={{
-        tabBarIcon: ({ focused }) => TabBarIcon('map-pin', focused),
-        tabBarLabel: 'Spots'
-      }}
-    />
-    <BottomTab.Screen
-      name='Map Tab'
-      component={MapTabStack}
-      options={{
-        tabBarIcon: ({ focused }) => TabBarIcon('map', focused),
-        tabBarLabel: 'Map'
-      }}
-    />
-    <BottomTab.Screen
-      name='Settings Tab'
-      component={SettingsScreen}
-      options={{
-        tabBarIcon: ({ focused }) => TabBarIcon('settings', focused),
-        tabBarLabel: 'Settings'
-      }}
-    />
-  </BottomTab.Navigator>
+  <>
+    <BottomTab.Navigator
+      initialRouteName='Map Tab'
+      screenOptions={bottomTabOptions}
+    >
+      <BottomTab.Screen
+        name='Spots Tab'
+        component={SpotsTabStack}
+        options={{
+          tabBarIcon: ({ focused }) => TabBarIcon('map-pin', focused),
+          tabBarLabel: 'Spots'
+        }}
+      />
+      <BottomTab.Screen
+        name='Map Tab'
+        component={MapTabStack}
+        options={{
+          tabBarIcon: ({ focused }) => TabBarIcon('map', focused),
+          tabBarLabel: 'Map'
+        }}
+      />
+      <BottomTab.Screen
+        name='Settings Tab'
+        component={SettingsScreen}
+        options={{
+          tabBarIcon: ({ focused }) => TabBarIcon('settings', focused),
+          tabBarLabel: 'Settings'
+        }}
+      />
+    </BottomTab.Navigator>
+  </>
 )
