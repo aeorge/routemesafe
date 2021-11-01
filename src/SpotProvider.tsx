@@ -26,9 +26,13 @@ export const SpotProvider = ({ children }: SpotProviderProps): JSX.Element => {
 
   useEffect(() => {
     const fetchSpots = async () => {
-      const response = await fetch(`${env.API_URL}/api/spots`)
-      const spots = await response.json()
-      setSpots(spots)
+      try {
+        const response = await fetch(`${env.API_URL}/api/spots`)
+        const spots = await response.json()
+        setSpots(spots)
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     fetchSpots()
