@@ -11,10 +11,13 @@ import {
   TextInput,
   View
 } from 'react-native'
+import { getDownloadURL, ref, uploadBytes } from '@firebase/storage'
 import { Route } from '@react-navigation/routers'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { Asset, launchCamera } from 'react-native-image-picker'
 import Icon from 'react-native-vector-icons/Feather'
 import env from '../../../env'
+import { firebaseStorage } from '../../../../firebase.config'
 import { Spot, SpotSeverity, SpotStatus, SpotType } from '../../../types'
 import { MapStackParamList } from '../MainScreen'
 import { useSpots } from '../../../SpotProvider'
@@ -35,7 +38,7 @@ type AddSpotForm = {
   type?: SpotType
   severity?: SpotSeverity
   comment?: string
-  images: string[]
+  images: Asset[]
 }
 
 export const AddSpotModalScreen = ({
@@ -53,6 +56,25 @@ export const AddSpotModalScreen = ({
 
   const { spots, setSpots } = useSpots()
 
+  const handleAddImage = () => {
+    launchCamera(
+      {
+        mediaType: 'photo',
+        quality: 0.8
+      },
+      (response) => {
+        if (!response.assets?.length) return
+
+        setForm({ ...form, images: [...form.images, ...response.assets] })
+      }
+    )
+  }
+
+  const handleRemoveImage = (uri: string) => {
+    const images = form.images.filter((value) => value.uri !== uri)
+    setForm({ ...form, images })
+  }
+
   const handleAddSpot = async () => {
     if (!form.type) {
       return Alert.alert('Please select the type of this spot.')
@@ -61,6 +83,8 @@ export const AddSpotModalScreen = ({
     if (!form.severity) {
       return Alert.alert('Please select the severity of this spot.')
     }
+
+    const images = await uploadImages(form.images)
 
     const spot: Spot = {
       type: 'Feature',
@@ -72,12 +96,12 @@ export const AddSpotModalScreen = ({
         type: form.type,
         severity: form.severity,
         comment: form.comment,
-        images: form.images,
+        images,
         voting: 0,
         status: SpotStatus.PENDING,
         validated: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
       }
     }
 
@@ -100,10 +124,26 @@ export const AddSpotModalScreen = ({
     }
   }
 
+  const uploadImages = async (images: Asset[]) => {
+    return await Promise.all(
+      images.map(async (image) => {
+        const response = await fetch(image.uri!)
+        const blob = await response.blob()
+        const spotImagesRef = ref(firebaseStorage, `spots/${image.fileName}`)
+        const snapshot = await uploadBytes(spotImagesRef, blob)
+        return await getDownloadURL(snapshot.ref)
+      })
+    )
+  }
+
   const handleKeyboardDismiss = () => Keyboard.dismiss()
 
   const PlusIcon = (): JSX.Element => (
     <Icon name='plus' size={26} color='#475569' />
+  )
+
+  const CrossIcon = (): JSX.Element => (
+    <Icon name='x' size={20} color='#475569' />
   )
 
   return (
@@ -279,17 +319,43 @@ export const AddSpotModalScreen = ({
               <Spacer height={8} />
               <View style={styles.imagesContainer}>
                 {!form.images.length ? (
-                  <Pressable style={styles.addImageButton}>
-                    <PlusIcon />
-                  </Pressable>
-                ) : (
                   <>
-                    {form.images.map((image, index) => (
-                      <Image source={{ uri: '' }} key={index} />
-                    ))}
-                    <Pressable style={styles.addImageButton}>
+                    <Pressable
+                      onPress={handleAddImage}
+                      style={styles.addImageButton}
+                    >
                       <PlusIcon />
                     </Pressable>
+                    {[...Array(3)].map((_, index) => (
+                      <View key={index} style={styles.imageContainer} />
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    {form.images.map(({ uri }, index) => (
+                      <View key={index} style={styles.imageContainer}>
+                        <Pressable
+                          onPress={() => handleRemoveImage(uri!)}
+                          style={styles.removeImageButton}
+                        >
+                          <CrossIcon />
+                        </Pressable>
+                        <Image source={{ uri }} style={styles.image} />
+                      </View>
+                    ))}
+                    {form.images.length <= 3 ? (
+                      <>
+                        <Pressable
+                          onPress={handleAddImage}
+                          style={styles.addImageButton}
+                        >
+                          <PlusIcon />
+                        </Pressable>
+                        {[...Array(3 - form.images.length)].map((_, index) => (
+                          <View key={index} style={styles.imageContainer} />
+                        ))}
+                      </>
+                    ) : null}
                   </>
                 )}
               </View>
@@ -378,20 +444,35 @@ const styles = StyleSheet.create({
   },
   imagesContainer: {
     display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexDirection: 'row'
   },
   addImageButton: {
+    flex: 1,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 60,
-    height: 60,
+    height: 80,
     margin: 4,
-    borderWidth: 2,
     borderRadius: 4,
-    borderColor: 'transparent',
     backgroundColor: '#E2E8F0'
+  },
+  imageContainer: {
+    flex: 1,
+    height: 80,
+    margin: 4
+  },
+  removeImageButton: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    borderRadius: 9999,
+    backgroundColor: '#E2E8F0',
+    zIndex: 9999
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 4
   },
   addSpotButton: {
     alignItems: 'center',
